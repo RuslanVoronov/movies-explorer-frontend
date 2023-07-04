@@ -1,0 +1,33 @@
+.about-project {
+    padding: 110px 70px;
+    text-align: start;
+}
+
+.about-project__title {
+    font-family: Inter;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 27px;
+    letter-spacing: -0.04em;
+    text-align: left;
+}
+
+
+
+.about-project__container {
+    display: flex;
+}
+
+
+
+.about-project__info {
+
+}
+
+
+
+.about-project__info-title {}
+
+
+
+.about-project__info-text {}
