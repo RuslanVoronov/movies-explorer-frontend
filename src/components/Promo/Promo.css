@@ -1,0 +1,22 @@
+.promo {
+    background: #073042;
+    height: 524px;
+    background-image: url(../../images/Landing.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.promo__title {
+    color: #FFF;
+    text-align: center;
+    font-size: 50px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 58px;
+    letter-spacing: -2px;
+    max-width: 730px;
+}

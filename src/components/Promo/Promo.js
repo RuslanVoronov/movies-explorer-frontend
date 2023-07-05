@@ -1,10 +1,11 @@
+import './Promo.css';
 import NavTab from "../NavTab/NavTab";
 
 function Promo() {
     return (
         <>
-            <div className="">
-                <h1>Учебный проект фаультет Веб-разработки</h1>
+            <div className="promo">
+                <h1 className="promo__title">Учебный проект студента факультета Веб-разработки</h1>
             </div>
             <NavTab />
         </>
