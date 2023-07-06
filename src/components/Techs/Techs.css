@@ -4,16 +4,6 @@
     text-align: start;
 }
 
-.techs__title {
-    color: #000;
-    font-size: 22px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: -0.88px;
-    border-bottom: 1px solid rgba(54, 54, 54, .7);
-}
-
 .techs__subtitle {
     color: #000;
     text-align: center;
@@ -34,4 +24,28 @@
     line-height: 20px;
     letter-spacing: -0.56px;
     max-width: 460px;
+}
+
+.techs__list {
+    padding: 0;
+    margin: 100px 0 0;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+.techs__list-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90px;
+    height: 60px;
+    border-radius: 10px;
+    background: #E8E8E8;
+    color: #000;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.56px;
 }

@@ -3,19 +3,6 @@
     text-align: start;
 }
 
-.about-project__title {
-    color: #000;
-    font-size: 22px;
-    font-family: Inter;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: -0.88px;
-    border-bottom: 1px solid rgba(54, 54, 54, .7);
-}
-
-
-
 .about-project__container {
     display: flex;
 }
@@ -47,4 +34,37 @@
     font-style: normal;
     font-weight: 400;
     line-height: 20px;
+}
+
+.timeline:first-of-type {
+    width: 20%;
+}
+
+.timeline:last-of-type {
+    width: 80%;
+}
+
+.timeline__title {
+    margin: 110px 0 0;
+    padding: 9px 0;
+    background: #2BE080;
+    text-align: center;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.timeline__title_type_light {
+    background: #F2F2F2;
+}
+
+.timeline__text {
+    margin: 14px 0 0;
+    color: #A0A0A0;
+    text-align: center;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 17px;
 }
