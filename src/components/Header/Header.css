@@ -4,6 +4,12 @@
     justify-content: space-between;
     align-items: flex-start;
     padding: 18px 70px;
-    background: #073042;
+}
 
+.header_type_dark {
+    background: #073042;
+}
+
+.header__menu-iten {
+    color: black;
 }
