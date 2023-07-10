@@ -3,9 +3,9 @@ import Header from "../Header/Header";
 import '../Header/Header.css'
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList"
-import './Movies.css'
+import '../Movies/Movies.css'
 
-function Movies() {
+function SavedMovies() {
     return (
         <>
             <Header className="header header_type_dark">
@@ -19,4 +19,4 @@ function Movies() {
     );
 }
 
-export default Movies;
+export default SavedMovies;

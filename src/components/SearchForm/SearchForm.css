@@ -1,7 +1,6 @@
 .search {
-    padding-bottom: 70px;
+    padding: 70px 0;
     border-bottom: 1px solid #E8E8E8;
-
 }
 
 .search__container {
@@ -11,6 +10,8 @@
     border-radius: 9px;
     background: #F9F9F9;
     padding: 16px 30px 16px 19px;
+    height: 72px;
+    box-sizing: border-box;
 }
 
 .search__form {
@@ -36,7 +37,6 @@
     border: none;
     padding: 0;
     width: 100%;
-    height: 72px;
 }
 
 .search__button {
