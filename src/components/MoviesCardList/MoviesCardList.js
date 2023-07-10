@@ -1,18 +1,14 @@
-import './SearchForm.css'
 import MoviesCard from "../MoviesCard/MoviesCard"
-
+import './MoviesCardList.css'
 function MoviesCardList(props) {
     return (
         <>
-            {
-                props.cards.map((card) => {
-                    return (
-                        <MoviesCard 
-                            
-                        />
-                    )
-                })
-            }
+            <ul className="movies-list">
+                <MoviesCard />
+                <MoviesCard />
+                <MoviesCard />
+                <MoviesCard />
+            </ul>
         </>
     );
 }

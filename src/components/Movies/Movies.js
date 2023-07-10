@@ -3,20 +3,18 @@ import Header from "../Header/Header";
 import '../Header/Header.css'
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList"
-import { Link } from 'react-router-dom';
-
-function Main() {
+function Movies() {
     return (
         <>
             <Header className="header header_type_dark">
             </Header>
-            <main className="movies">
-                <SearchForm  />
+            <section className="movies">
+                <SearchForm />
                 <MoviesCardList />
-            </main>
+            </section>
             <Footer />
         </>
     );
 }
 
-export default Main;
+export default Movies;

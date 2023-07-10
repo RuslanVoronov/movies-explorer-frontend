@@ -5,15 +5,17 @@ import { Routes, Route } from 'react-router-dom';
 // import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
+import Profile from '../Profile/Profile';
+import Movies from '../Movies/Movies';
 
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route path='*' element={<Main />} />
-        <Route path='/movies' />
+        <Route path='/movies' element={<Movies />} />
         <Route path='/saved-movies' />
-        <Route path='/profile' />
+        <Route path='/profile' element={<Profile />} />
         <Route path='/signin' element={<Login />} />
         <Route path='/signup' element={<Register />} />
       </Routes>
