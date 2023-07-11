@@ -1,5 +1,5 @@
 .footer {
-    padding: 70px 80px 20px;
+    padding: 80px 70px 20px;
     text-align: start;
     background: #FAFAFA;
 }
@@ -37,4 +37,10 @@
     font-weight: 400;
     line-height: normal;
     margin: 0;
+}
+
+@media (max-width:768px) {
+    .footer {
+        padding: 80px 30px 20px;
+    }
 }
