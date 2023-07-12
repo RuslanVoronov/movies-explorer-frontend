@@ -1,14 +1,15 @@
 .profile {
-    min-height: 100vh;
+    padding: 74px 0 0;
     box-sizing: border-box;
 }
 
 .profile__title {
-    margin: 0;
+    margin: 0 0 123px;
     text-align: center;
-    margin-bottom: 123px;
     font-size: 24px;
     font-weight: 500;
+    font-weight: 500;
+    line-height: normal;
 }
 
 .profile__form {
@@ -67,4 +68,35 @@
 
 .profile__button_type_red-text {
     color: #EE3465;
+}
+
+@media (max-width: 768px) {
+    .profile {
+        padding: 236px 0 0;
+        
+    }
+
+    .profile__title {
+        font-size: 24px;
+        font-weight: 500;
+    }
+
+    .profile__form {
+        margin: 0 auto 210px;
+    }
+}
+
+@media (max-width:440px) {
+    .profile {
+        padding: 70px 30px 0; 
+    }
+
+    .profile__title {
+        font-size: 24px;
+        font-weight: 500;
+    }
+
+    .profile__form {
+        margin: 0 auto 380px;
+    }
 }
