@@ -13,10 +13,12 @@
     line-height: normal;
     border-bottom: 1px solid #E8E8E8;
     padding-bottom: 20px;
+    margin: 0;
 }
 
 .footer__container {
     display: flex;
+    padding-top: 20px;
     justify-content: space-between;
 }
 
@@ -41,6 +43,40 @@
 
 @media (max-width:768px) {
     .footer {
+        background: #FFF;
         padding: 80px 30px 20px;
     }
+}
+
+@media (max-width:370px) {
+    .footer {
+        padding: 80px 10px 20px;
+    }
+
+    .footer__container {
+        flex-direction: column-reverse;
+    }
+
+    .footer__title {
+        font-size: 12px;
+    }
+
+    .footer__link {
+        font-size: 12px;
+        text-align: center;
+        margin: 0 0 12px
+    }
+
+    .footer__copyright {
+        font-size: 12px;
+        text-align: center;
+        margin-top: 18px;
+    }
+
+    .footer__nav {
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+    }
+
 }

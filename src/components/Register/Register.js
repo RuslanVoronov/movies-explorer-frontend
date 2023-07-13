@@ -1,5 +1,4 @@
 import '../Form/Form.css';
-import Header from '../Header/Header';
 import { Link } from "react-router-dom";
 
 function Register() {

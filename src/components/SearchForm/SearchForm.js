@@ -12,16 +12,14 @@ function SearchForm() {
                 </form>
                 <div className="search__toggle">
                     <label className="search__tumbler">
-                        <input type="checkbox" className="search__checkbox" />
-                        <span className="search__slider" />
+                        <input type="checkbox" className="search__invisible-checkbox" />
+                        <span className="search__visible-checkbox" />
                     </label>
                     <p className="search__text">Короткометражки</p>
                 </div>
             </div>
 
         </section>
-
-
     );
 }
 
