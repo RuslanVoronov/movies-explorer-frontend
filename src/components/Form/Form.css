@@ -10,10 +10,13 @@
     height: 100vh;
 }
 
+.form__container {
+    width: 100%;
+    max-width: 400px;
+}
+
 .form__logo {
-    width: 46px;
-    height: 46px;
-    background: url(../../images/Logo.svg) no-repeat;
+    align-items: start;
 }
 
 .form__title {

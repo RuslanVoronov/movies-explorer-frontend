@@ -1,6 +1,7 @@
 import MoviesCard from "../MoviesCard/MoviesCard"
 import './MoviesCardList.css'
-function MoviesCardList(props) {
+
+function MoviesCardList() {
     return (
         <>
             <ul className="movies-list">

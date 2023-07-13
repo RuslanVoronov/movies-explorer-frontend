@@ -1,16 +1,25 @@
 import '../Form/Form.css';
 import { Link } from "react-router-dom";
 import logo from '../../images/Logo.svg';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
+
+    const navigate = useNavigate()
+
+    const handleSubmit = (evt) => {
+        evt.preventDefault();
+        navigate("/movies")
+    };
+
     return (
-        <>
-            <section className="form">
+        <section className="form">
+            <div className='form__container'>
                 <Link className='form__logo' to='/'>
-                    {/* <img src={logo} alt="Логотип" className='' /> */}
+                    <img src={logo} alt="Логотип" />
                 </Link>
                 <h2 className="form__title">Рады видеть!</h2>
-                <form className="form__form" >
+                <form className="form__form" onSubmit={handleSubmit} >
                     <div>
                         <div className='form__area'>
                             <p className="form__text">E-mail</p>
@@ -28,8 +37,8 @@ function Login() {
                     <button className="form__submit" type="submit">Войти</button>
                 </form>
                 <p className="form__extra-text">Ещё не зарегистрированы? <Link className="form__link" to="/signup">Регистрация</Link></p>
-            </section>
-        </>
+            </div>
+        </section>
     );
 }
 
