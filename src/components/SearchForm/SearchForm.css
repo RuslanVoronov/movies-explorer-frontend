@@ -38,6 +38,10 @@
     width: 100%;
 }
 
+.search__input:focus{
+    border-bottom: 1px solid #4285f4;
+}
+
 .search__button {
     padding: 0;
     box-sizing: border-box;
@@ -47,6 +51,10 @@
     cursor: pointer;
     background: url(../../images/search.svg) center no-repeat;
     padding-right: 80px;
+}
+
+.search__button:hover {
+    opacity: .7;
 }
 
 .search__toggle {
@@ -128,6 +136,7 @@
     .search {
         padding: 80px 0 0px;
     }
+
     .search__container {
         flex-direction: column;
         background: #FFF;

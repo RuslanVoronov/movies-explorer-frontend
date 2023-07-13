@@ -8,7 +8,7 @@ import '../Movies/Movies.css'
 function SavedMovies() {
     return (
         <>
-            <Header className="header header_type_dark">
+            <Header className="header">
             </Header>
             <section className="movies">
                 <SearchForm />
