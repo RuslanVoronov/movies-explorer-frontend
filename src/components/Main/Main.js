@@ -8,10 +8,10 @@ import Header from "../Header/Header";
 import '../Header/Header.css'
 import { Link } from 'react-router-dom';
 
-function Main({ onMenu }) {
+function Main(props) {
     return (
         <>
-            <Header onMenu={onMenu} className="header header_type_dark">
+            <Header onMenuClick={props}>
                 <Link to="/signup" className="header__menu-item">Регистрация</Link>
                 <Link to="/signin" className="header__menu-item">Войти</Link>
             </Header>

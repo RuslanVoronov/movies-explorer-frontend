@@ -1,8 +1,9 @@
+import MenuPopup from '../MenuPopup/MenuPopup';
 import './NavLog.css'
 import { Link, NavLink } from 'react-router-dom';
 
-function NavLog() {
-
+function NavLog({onMenuClick}) {
+    console.log(onMenuClick)
     return (
         <>
             <nav className="nav-log">
@@ -19,8 +20,8 @@ function NavLog() {
                 <Link to="/profile" className="nav-log__link nav-log__link_type_profile">Аккаунт</Link>
 
             </nav>
-            <button type='button' className='nav-log__menu'></button>
-
+            <button type='button' className='nav-log__menu' onClick={onMenuClick}></button>
+            <MenuPopup />
         </>
     );
 };

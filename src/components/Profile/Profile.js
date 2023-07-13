@@ -1,10 +1,10 @@
 import './Profile.css'
 import Header from '../Header/Header';
 
-function Profile() {
+function Profile({onMenuClick}) {
     return (
         <>
-            <Header>
+            <Header onMenuClick={onMenuClick}>
             </Header>
             <section className="profile">
                 <h2 className="profile__title">Привет, Руслан!</h2>
