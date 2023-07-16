@@ -5,13 +5,13 @@ import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList"
 import './Movies.css'
 
-function Movies({onMenuClick}) {
+function Movies({ onMenuClick, onSearchMovies }) {
     return (
         <>
             <Header className="header" onMenuClick={onMenuClick}>
             </Header>
             <section className="movies">
-                <SearchForm />
+                <SearchForm onSearchMovies={onSearchMovies} />
                 <MoviesCardList />
             </section>
             <Footer />

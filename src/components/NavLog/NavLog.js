@@ -3,7 +3,6 @@ import './NavLog.css'
 import { Link, NavLink } from 'react-router-dom';
 
 function NavLog({onMenuClick}) {
-    console.log(onMenuClick)
     return (
         <>
             <nav className="nav-log">
