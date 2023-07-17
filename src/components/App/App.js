@@ -11,12 +11,14 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import { useState } from 'react';
 import MenuPopup from '../MenuPopup/MenuPopup';
 import moviesApi from '../../utils/MoviesApi';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function App() {
 
   const [isMenuPopupOpened, setIsMenuPopupOpened] = useState(false);
-  const [movies, setMovies] = useState([])
+  const [movies, setMovies] = useState([]);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   function handleSearchMovies(data) {
     moviesApi.getMovies(data)
@@ -44,9 +46,32 @@ function App() {
         <Routes>
           <Route path='*' element={<NotFoundPage />} />
           <Route path='/' element={<Main />} />
-          <Route path='/movies' element={<Movies onMenuClick={handleMenuClick} onSearchMovies={handleSearchMovies} />} />
-          <Route path='/saved-movies' element={<SavedMovies onMenuClick={handleMenuClick} />} />
-          <Route path='/profile' element={<Profile onMenuClick={handleMenuClick} />} />
+          <Route path='/movies' element={
+            <ProtectedRoute
+              loggedIn={setLoggedIn}
+              element={Movies}
+              onMenuClick={handleMenuClick}
+              onSearchMovies={handleSearchMovies}
+            />
+          } />
+          <Route path='/saved-movies' element={
+            <ProtectedRoute
+              loggedIn={setLoggedIn}
+              element={SavedMovies}
+              onMenuClick={handleMenuClick}
+              onSearchMovies={handleSearchMovies}
+            />
+          }
+          />
+          <Route path='/profile' element={
+            <ProtectedRoute
+              loggedIn={setLoggedIn}
+              element={Profile}
+              onMenuClick={handleMenuClick}
+              onSearchMovies={handleSearchMovies}
+            />
+          }
+          />
           <Route path='/signin' element={<Login />} />
           <Route path='/signup' element={<Register />} />
         </Routes>
