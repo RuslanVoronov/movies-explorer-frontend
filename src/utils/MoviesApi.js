@@ -13,7 +13,7 @@ class Api {
     };
 
     getMovies() {
-        return fetch(`${this._url}/beatfilm-movies`, {
+        return fetch(`${this._baseUrl}`, {
             method: 'GET',
             headers: this._headers,
         }).then(this._checkServer);

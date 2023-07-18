@@ -64,8 +64,35 @@ class Api {
     }
 
     getMovies() {
-        return fetch(`${this._baseUrl}/beatfilm-movies`, {
+        return fetch(`${this._baseUrl}/movies`, {
             method: 'GET',
+            headers: this._headers,
+        }).then(this._checkServer);
+    }
+
+    addMovies(movie) {
+        return fetch(`${this._baseUrl}/movies`, {
+            method: 'POST',
+            headers: this._headers,
+            body: JSON.stringify({
+                country: movie.country || 'Нет данных',
+                director: movie.director,
+                duration: movie.duration,
+                year: movie.year,
+                description: movie.description,
+                image: (`https://api.nomoreparties.co/${movie.image.url}`),
+                trailerLink: movie.trailerLink || 'https://www.youtube.com',
+                thumbnail: (`https://api.nomoreparties.co/${movie.image.formats.thumbnail.url}`),
+                movieId: movie.id,
+                nameRU: movie.nameRU || 'Нет данных',
+                nameEN: movie.nameEN || 'Нет данных'
+            })
+        }).then(this._checkServer);
+    }
+
+    deleteMovies(movieCardId) {
+        return fetch(`${this._baseUrl}/movies${movieCardId}`, {
+            method: 'DELETE',
             headers: this._headers,
         }).then(this._checkServer);
     }

@@ -37,6 +37,11 @@
     display: flex;
     align-items: center;
     cursor: pointer;
+    background-image: url(../../images/Save-button_inactive.svg);
+    border: none;
+    border-radius: 30px;
+    width: 30px;
+    height: 30px
 }
 
 .movie-card__button:hover {
@@ -45,16 +50,8 @@
 
 .movie-card__button_delete {
     background-image: url(../../images/delete-button.svg);
-    border: none;
-    border-radius: 30px;
-    width: 30px;
-    height: 30px;
 }
 
 .movie-card__button_active {
     background-image: url(../../images/Save-button.svg);
-    border: none;
-    border-radius: 30px;
-    width: 30px;
-    height: 30px;
 }

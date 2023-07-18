@@ -1,5 +1,5 @@
 import './MenuPopup.css'
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 function MenuPopup({ isPopupOpen, onClose }) {
 
@@ -10,7 +10,7 @@ function MenuPopup({ isPopupOpen, onClose }) {
                 <ul className="menu-popup__list">
                     <li className="menu-popup__item">
                         <NavLink to="/" onClick={onClose} className="menu-popup__link"
-                            activeClassName="menu-popup__link">Главная</NavLink>
+                            activeClassName="menu-popup__link_active">Главная</NavLink>
                     </li>
                     <li className="menu-popup__item">
                         <NavLink to="/movies" onClick={onClose} className="menu-popup__link"
@@ -21,7 +21,7 @@ function MenuPopup({ isPopupOpen, onClose }) {
                             activeClassName="menu-popup__link">Сохранённые фильмы</NavLink>
                     </li>
                 </ul>
-                <Link to="/profile" onClick={onClose} className="menu-popup__link menu-popup__link_type_profile">Аккаунт</Link>
+                <NavLink to="/profile" onClick={onClose} className="menu-popup__link menu-popup__link_type_profile">Аккаунт</NavLink>
             </div>
         </nav>
     );

@@ -19,6 +19,8 @@ function App() {
 
   const [currentUser, setCurrentUser] = useState({});
   const [isMenuPopupOpened, setIsMenuPopupOpened] = useState(false);
+  const [isMovieSaved, setIsMovieSaved] = useState(false)
+  const [movieCard, setMovieCard] = useState([])
   const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate()
 
@@ -38,6 +40,13 @@ function App() {
       mainApi.getUserInfo()
         .then((res) => {
           setCurrentUser(res)
+        })
+        .catch((err) => {
+          console.log(`Ошибка: ${err}`);
+        });
+      moviesApi.getMovies()
+        .then((res) => {
+          setMovieCard(res)
         })
         .catch((err) => {
           console.log(`Ошибка: ${err}`);
@@ -81,6 +90,16 @@ function App() {
     localStorage.removeItem('jwt');
   }
 
+  function handleGetMovies() {
+    moviesApi.getMovies()
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`)
+      })
+  }
+
   // Изменение информации профиля
   function handleUpdateUserUnfo(data) {
     mainApi.updateUserUnfo(data)
@@ -102,6 +121,7 @@ function App() {
       });
   }
 
+  // Работа с попапом
   function handleMenuClick() {
     setIsMenuPopupOpened(!isMenuPopupOpened)
   }
@@ -109,19 +129,26 @@ function App() {
   function closePopup() {
     setIsMenuPopupOpened(false);
   }
+
+  function saveMovies() {
+    setIsMovieSaved(true)
+  }
+
   return (
     <div className="App">
       <CurrentUserContext.Provider value={currentUser}>
 
         <Routes>
           <Route path='*' element={<NotFoundPage />} />
-          <Route path='/' element={<Main onMenuClick={handleMenuClick} loggedIn={loggedIn}/>} />
+          <Route path='/' element={<Main onMenuClick={handleMenuClick} loggedIn={loggedIn} />} />
           <Route path='/movies' element={
             <ProtectedRoute
               loggedIn={loggedIn}
               element={Movies}
               onMenuClick={handleMenuClick}
+              movieCard={movieCard}
               onSearchMovies={handleSearchMovies}
+              onSaveMovie={saveMovies}
             />
           } />
           <Route path='/saved-movies' element={
