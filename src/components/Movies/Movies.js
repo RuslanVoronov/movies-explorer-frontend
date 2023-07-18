@@ -5,7 +5,7 @@ import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList"
 import './Movies.css'
 
-function Movies({ onMenuClick, onSearchMovies }) {
+function Movies({ onMenuClick, onSearchMovies}) {
     return (
         <>
             <Header className="header" onMenuClick={onMenuClick}>
