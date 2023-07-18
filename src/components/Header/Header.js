@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom';
 import NavAuth from '../NavAuth/NavAuth';
 import NavLog from '../NavLog/NavLog';
 
-function Header({onMenuClick}) {
+function Header({ onMenuClick, loggedIn }) {
     const { pathname } = useLocation();
 
     return (
@@ -13,7 +13,7 @@ function Header({onMenuClick}) {
             <Link to='/'>
                 <img src={logo} alt="Логотип" className="header__logo" />
             </Link>
-            {pathname === '/' ? <NavAuth /> : <NavLog onMenuClick={onMenuClick} />}
+            {pathname === '/' && !loggedIn ? <NavAuth /> : <NavLog onMenuClick={onMenuClick} />}
         </header>
     );
 }

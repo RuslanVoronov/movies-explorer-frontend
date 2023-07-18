@@ -17,7 +17,7 @@ function SearchForm({ onSearchMovies }) {
             <div className='search__container'>
                 <form className="search__form" onSubmit={handleSubmit}>
                     <div className="search__icon"></div>
-                    <input className="search__input" placeholder="Фильм" type="text" value={values.movie || ''} onChange={handleChange}
+                    <input className="search__input" placeholder="Фильм" type="text" value={values.movieName} onChange={handleChange}
                         id="movie" name='movie' required />
                     <button className="search__button" type="submit" ></button>
                 </form>

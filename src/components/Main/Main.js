@@ -6,14 +6,11 @@ import Portfolio from "../Portfolio/Portfolio";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import '../Header/Header.css'
-import { Link } from 'react-router-dom';
 
-function Main(props) {
+function Main({ handleMenuClick, loggedIn }) {
     return (
         <>
-            <Header onMenuClick={props}>
-                <Link to="/signup" className="header__menu-item">Регистрация</Link>
-                <Link to="/signin" className="header__menu-item">Войти</Link>
+            <Header onMenuClick={handleMenuClick} loggedIn={loggedIn}>
             </Header>
             <main className="Main">
                 <Promo />

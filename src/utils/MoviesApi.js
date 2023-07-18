@@ -16,7 +16,7 @@ class Api {
         return fetch(`${this._url}/beatfilm-movies`, {
             method: 'GET',
             headers: this._headers,
-        }).then(this._checkResponse);
+        }).then(this._checkServer);
     }
 
 };

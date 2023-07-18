@@ -56,7 +56,6 @@
     border: none;
     background-color: transparent;
     border-bottom: 2px solid #E8E8E8;
-    margin-bottom: 25px;
     padding-bottom: 10px;
     font-style: normal;
     font-weight: 500;
@@ -65,11 +64,22 @@
 }
 
 .form__input:focus {
-    outline:none;
+    outline: none;
     border-bottom: 2px solid #2BE080;
 }
 
-.form__error {
+.form__input_error {
+    color: #EE3465;
+    border-bottom: 2px solid #EE3465;
+}
+
+.form__input_error:focus {
+    border-bottom: 2px solid #EE3465;
+}
+
+.form__error-message {
+    margin-top: 6px;
+    height: 25px;
     color: #EE3465;
     font-size: 10px;
     font-style: normal;
@@ -110,6 +120,15 @@
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+}
+
+.form__submit_invalid {
+    color: #000000;
+    background: #FFFFFF;
+    opacity: 0.2;
+    border: 1px solid #000000;
+    border-radius: 2px;
+    cursor: default;
 }
 
 @media (max-width: 450px) {
