@@ -2,17 +2,18 @@ import MenuPopup from '../MenuPopup/MenuPopup';
 import './NavLog.css'
 import { Link, NavLink } from 'react-router-dom';
 
-function NavLog({onMenuClick}) {
+function NavLog({ onMenuClick }) {
+
     return (
         <>
             <nav className="nav-log">
                 <ul className="nav-log__list">
                     <li className="nav-log__item">
-                        <NavLink to="/movies" className="nav-log__link"
-                            activeClassName="nav-log__link_active">Фильмы</NavLink>
+                        <NavLink to="/movies" exact className="nav-log__link"
+                            activeClassName="nav-log__link_active" >Фильмы</NavLink>
                     </li>
                     <li className="nav-log__item">
-                        <NavLink to="/saved-movies" className="nav-log__link"
+                        <NavLink to="/saved-movies" exact className="nav-log__link"
                             activeClassName="nav-log__link_active">Сохранённые фильмы</NavLink>
                     </li>
                 </ul>

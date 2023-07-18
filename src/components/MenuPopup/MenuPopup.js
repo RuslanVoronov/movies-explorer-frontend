@@ -9,19 +9,19 @@ function MenuPopup({ isPopupOpen, onClose }) {
                 <button className='menu-popup__close-button' onClick={onClose}></button>
                 <ul className="menu-popup__list">
                     <li className="menu-popup__item">
-                        <NavLink to="/" className="menu-popup__link"
+                        <NavLink to="/" onClick={onClose} className="menu-popup__link"
                             activeClassName="menu-popup__link">Главная</NavLink>
                     </li>
                     <li className="menu-popup__item">
-                        <NavLink to="/movies" className="menu-popup__link"
+                        <NavLink to="/movies" onClick={onClose} className="menu-popup__link"
                             activeClassName="menu-popup__link">Фильмы</NavLink>
                     </li>
                     <li className="menu-popup__item">
-                        <NavLink to="/saved-movies" className="menu-popup__link"
+                        <NavLink to="/saved-movies" onClick={onClose} className="menu-popup__link"
                             activeClassName="menu-popup__link">Сохранённые фильмы</NavLink>
                     </li>
                 </ul>
-                <Link to="/profile" className="menu-popup__link menu-popup__link_type_profile">Аккаунт</Link>
+                <Link to="/profile" onClick={onClose} className="menu-popup__link menu-popup__link_type_profile">Аккаунт</Link>
             </div>
         </nav>
     );

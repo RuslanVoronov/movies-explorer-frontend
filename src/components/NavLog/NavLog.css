@@ -19,6 +19,14 @@
     text-decoration: none;
 }
 
+.nav-log__link_active {
+    text-decoration: underline;
+}
+
+.active {
+    text-decoration: underline;
+}
+
 .nav-log__link_type_profile {
     padding: 8px 20px;
     border-radius: 20px;
