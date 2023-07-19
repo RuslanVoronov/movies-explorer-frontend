@@ -24,13 +24,13 @@ function App() {
   const [savedMovies, setSavedMovies] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate()
-
   // Проверка Токена
   useEffect(() => {
     const jwt = localStorage.getItem("token")
     if (jwt) {
       setLoggedIn(true)
-      navigate("/saved-movies")
+      navigate("/movies")
+      // saved-
     }
   }, [])
 
@@ -110,9 +110,11 @@ function App() {
 
   // Удаление карточек
   function handleDeleteCard(movie) {
-    mainApi.deleteMovie(movie._id)
-      .then((res) => {
-        setSavedMovies((state) => state.filter((item) => item._id !== movie._id));
+    const cardToBeremoved = savedMovies.find(item => item.movieId === (movie.id || movie.movieId) && item.owner === currentUser._id)
+    if (!cardToBeremoved) return
+    mainApi.deleteMovie(cardToBeremoved._id)
+      .then(() => {
+        setSavedMovies((state) => state.filter((item) => item._id !== cardToBeremoved._id));
       })
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
@@ -139,6 +141,11 @@ function App() {
     setIsMenuPopupOpened(false);
   }
 
+  function isSaved(movie) {
+    return savedMovies.some(item => item.movieId === movie.id && item.owner === currentUser._id)
+  }
+
+
   return (
     <div className="App">
       <CurrentUserContext.Provider value={currentUser}>
@@ -152,7 +159,9 @@ function App() {
               element={Movies}
               onMenuClick={handleMenuClick}
               movieCard={movieCard}
+              isSaved={isSaved}
               onSaveMovie={handleCardSave}
+              onDeleteMovie={handleDeleteCard}
             />
           } />
           <Route path='/saved-movies' element={
@@ -160,6 +169,7 @@ function App() {
               loggedIn={loggedIn}
               element={SavedMovies}
               movieCard={savedMovies}
+              isSaved={isSaved}
               onMenuClick={handleMenuClick}
               onDeleteMovie={handleDeleteCard}
             />

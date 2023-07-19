@@ -1,7 +1,7 @@
 import MoviesCard from "../MoviesCard/MoviesCard"
 import './MoviesCardList.css'
 
-function MoviesCardList({ movieCard, OnSaveMovie, onDeleteMovie }) {
+function MoviesCardList({ movieCard, OnSaveMovie, onDeleteMovie, isSaved }) {
 
 
     return (
@@ -11,6 +11,7 @@ function MoviesCardList({ movieCard, OnSaveMovie, onDeleteMovie }) {
                     movieCard.map((movie) => {
                         return (
                             <MoviesCard
+                                isSaved={isSaved}
                                 movieCardInfo={movie}
                                 OnSaveMovie={OnSaveMovie}
                                 onDeleteMovie={onDeleteMovie}
