@@ -19,18 +19,17 @@ function App() {
 
   const [currentUser, setCurrentUser] = useState({});
   const [isMenuPopupOpened, setIsMenuPopupOpened] = useState(false);
-  const [isMovieSaved, setIsMovieSaved] = useState(false)
   const [movieCard, setMovieCard] = useState([])
   const [savedMovies, setSavedMovies] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate()
+
   // Проверка Токена
   useEffect(() => {
     const jwt = localStorage.getItem("token")
     if (jwt) {
       setLoggedIn(true)
-      navigate("/movies")
-      // saved-
+      navigate("/saved-movies")
     }
   }, [])
 
@@ -141,8 +140,20 @@ function App() {
     setIsMenuPopupOpened(false);
   }
 
+  // Поиск сохранённого фильма по movie id
   function isSaved(movie) {
     return savedMovies.some(item => item.movieId === movie.id && item.owner === currentUser._id)
+  }
+
+
+  // Форма поиска
+  function handleSearchMovie(movieName, checkbox) {
+    moviesApi.getMovies()
+      .then((movies) => {
+        const searchedMovies = movies.filter((item) => item.nameRU.includes(movieName))
+        const foundMovies = checkbox ? searchedMovies.filter((item) => item.duration <= 40) : searchedMovies
+        setMovieCard(foundMovies)
+      })
   }
 
 
@@ -162,6 +173,7 @@ function App() {
               isSaved={isSaved}
               onSaveMovie={handleCardSave}
               onDeleteMovie={handleDeleteCard}
+              onSearchMovie={handleSearchMovie}
             />
           } />
           <Route path='/saved-movies' element={
@@ -172,6 +184,7 @@ function App() {
               isSaved={isSaved}
               onMenuClick={handleMenuClick}
               onDeleteMovie={handleDeleteCard}
+              onSearchMovie={handleSearchMovie}
             />
           }
           />
