@@ -1,7 +1,7 @@
 import MoviesCard from "../MoviesCard/MoviesCard"
 import './MoviesCardList.css'
 
-function MoviesCardList({ movieCard, OnSaveMovies }) {
+function MoviesCardList({ movieCard, OnSaveMovie, onDeleteMovie }) {
 
 
     return (
@@ -12,12 +12,13 @@ function MoviesCardList({ movieCard, OnSaveMovies }) {
                         return (
                             <MoviesCard
                                 movieCardInfo={movie}
+                                OnSaveMovie={OnSaveMovie}
+                                onDeleteMovie={onDeleteMovie}
                             />
                         )
                     })
                 }
             </ul>
-            <button className="movies-list__button" type="button">Ещё</button>
         </>
     );
 }

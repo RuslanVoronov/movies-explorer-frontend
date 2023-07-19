@@ -1,8 +1,7 @@
 import './MoviesCard.css'
 import { useLocation } from 'react-router-dom';
 
-function MoviesCard({ movieCardInfo }) {
-    console.log(movieCardInfo.image)
+function MoviesCard({ movieCardInfo, OnSaveMovie, onDeleteMovie }) {
     const { pathname } = useLocation();
 
     function duration() {
@@ -16,6 +15,14 @@ function MoviesCard({ movieCardInfo }) {
         }
     }
 
+    function handleCardSave() {
+        OnSaveMovie(movieCardInfo)
+    }
+
+    function handleDeleteCard() {
+        onDeleteMovie(movieCardInfo)
+    }
+
     return (
         <li className="movie-card">
             <div className='movie-card__container'>
@@ -25,14 +32,17 @@ function MoviesCard({ movieCardInfo }) {
                 </div>
                 <div className='movie-card__button'>
                     {pathname === '/saved-movies' ? (
-                        <button type="button" className="movie-card__button movie-card__button_delete" />
+                        <button type="button" onClick={handleDeleteCard} className="movie-card__button movie-card__button_delete" />
                     ) : (
-                        <button type="button" className={`movie-card__button`}
+                        <button type="button" onClick={handleCardSave} className={`movie-card__button`}
                         />
                     )}
                 </div>
             </div>
-            <img className="movie-card__image" src={`https://api.nomoreparties.co/${movieCardInfo.image.url}`} alt='Властелин колец' />
+            {/* `https://api.nomoreparties.co${movieCardInfo.image.url}` */}
+            <img className="movie-card__image"
+                src={pathname === '/movies' ? `https://api.nomoreparties.co${movieCardInfo.image.url}` : movieCardInfo.image}
+                alt={movieCardInfo.nameRU} />
         </li>
     );
 }

@@ -66,13 +66,15 @@ class Api {
     getMovies() {
         return fetch(`${this._baseUrl}/movies`, {
             method: 'GET',
+            credentials: "include",
             headers: this._headers,
         }).then(this._checkServer);
     }
 
-    addMovies(movie) {
+    addMovie(movie) {
         return fetch(`${this._baseUrl}/movies`, {
             method: 'POST',
+            credentials: "include",
             headers: this._headers,
             body: JSON.stringify({
                 country: movie.country || 'Нет данных',
@@ -82,7 +84,7 @@ class Api {
                 description: movie.description,
                 image: (`https://api.nomoreparties.co/${movie.image.url}`),
                 trailerLink: movie.trailerLink || 'https://www.youtube.com',
-                thumbnail: (`https://api.nomoreparties.co/${movie.image.formats.thumbnail.url}`),
+                thumbnail: (`https://api.nomoreparties.coss${movie.image.formats.thumbnail.url}`),
                 movieId: movie.id,
                 nameRU: movie.nameRU || 'Нет данных',
                 nameEN: movie.nameEN || 'Нет данных'
@@ -90,9 +92,10 @@ class Api {
         }).then(this._checkServer);
     }
 
-    deleteMovies(movieCardId) {
-        return fetch(`${this._baseUrl}/movies${movieCardId}`, {
+    deleteMovie(movieCardId) {
+        return fetch(`${this._baseUrl}/movies/${movieCardId}`, {
             method: 'DELETE',
+            credentials: "include",
             headers: this._headers,
         }).then(this._checkServer);
     }
@@ -101,6 +104,7 @@ class Api {
 
 const mainApi = new Api({
     baseUrl: 'http://localhost:3001',
+    credentials: "include",
     headers: {
         'Content-Type': 'application/json'
     }

@@ -21,16 +21,16 @@ function App() {
   const [isMenuPopupOpened, setIsMenuPopupOpened] = useState(false);
   const [isMovieSaved, setIsMovieSaved] = useState(false)
   const [movieCard, setMovieCard] = useState([])
+  const [savedMovies, setSavedMovies] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate()
-
 
   // Проверка Токена
   useEffect(() => {
     const jwt = localStorage.getItem("token")
     if (jwt) {
       setLoggedIn(true)
-      navigate("/movies")
+      navigate("/saved-movies")
     }
   }, [])
 
@@ -51,6 +51,13 @@ function App() {
         .catch((err) => {
           console.log(`Ошибка: ${err}`);
         });
+      mainApi.getMovies()
+        .then((res) => {
+          setSavedMovies(res)
+        })
+        .catch((err) => {
+          console.log(`Ошибка: ${err}`)
+        })
     }
   }, [loggedIn]);
 
@@ -90,14 +97,26 @@ function App() {
     localStorage.removeItem('jwt');
   }
 
-  function handleGetMovies() {
-    moviesApi.getMovies()
-      .then((res) => {
-        console.log(res)
+  //  сохранение карточек
+  function handleCardSave(movie) {
+    mainApi.addMovie(movie)
+      .then((movieData) => {
+        setSavedMovies([...savedMovies, movieData])
       })
       .catch((err) => {
-        console.log(`Ошибка: ${err}`)
+        console.log(`Ошибка: ${err}`);
       })
+  }
+
+  // Удаление карточек
+  function handleDeleteCard(movie) {
+    mainApi.deleteMovie(movie._id)
+      .then((res) => {
+        setSavedMovies((state) => state.filter((item) => item._id !== movie._id));
+      })
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+      });
   }
 
   // Изменение информации профиля
@@ -111,16 +130,6 @@ function App() {
       })
   }
 
-  function handleSearchMovies(data) {
-    moviesApi.getMovies(data)
-      .then((res) => {
-        console.log(res)
-      })
-      .catch((err) => {
-        console.log(`Ошибка: ${err}`);
-      });
-  }
-
   // Работа с попапом
   function handleMenuClick() {
     setIsMenuPopupOpened(!isMenuPopupOpened)
@@ -128,10 +137,6 @@ function App() {
 
   function closePopup() {
     setIsMenuPopupOpened(false);
-  }
-
-  function saveMovies() {
-    setIsMovieSaved(true)
   }
 
   return (
@@ -147,16 +152,16 @@ function App() {
               element={Movies}
               onMenuClick={handleMenuClick}
               movieCard={movieCard}
-              onSearchMovies={handleSearchMovies}
-              onSaveMovie={saveMovies}
+              onSaveMovie={handleCardSave}
             />
           } />
           <Route path='/saved-movies' element={
             <ProtectedRoute
               loggedIn={loggedIn}
               element={SavedMovies}
+              movieCard={savedMovies}
               onMenuClick={handleMenuClick}
-              onSearchMovies={handleSearchMovies}
+              onDeleteMovie={handleDeleteCard}
             />
           }
           />
