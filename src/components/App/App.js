@@ -110,11 +110,11 @@ function App() {
 
   // Удаление карточек
   function handleDeleteCard(movie) {
-    const cardToBeremoved = savedMovies.find(item => item.movieId === (movie.id || movie.movieId) && item.owner === currentUser._id)
-    if (!cardToBeremoved) return
-    mainApi.deleteMovie(cardToBeremoved._id)
+    const cardToBeRemoved = savedMovies.find(item => item.movieId === (movie.id || movie.movieId) && item.owner === currentUser._id)
+    if (!cardToBeRemoved) return
+    mainApi.deleteMovie(cardToBeRemoved._id)
       .then(() => {
-        setSavedMovies((state) => state.filter((item) => item._id !== cardToBeremoved._id));
+        setSavedMovies((state) => state.filter((item) => item._id !== cardToBeRemoved._id));
       })
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
