@@ -5,7 +5,7 @@ import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList"
 import './Movies.css'
 
-function Movies({ onMenuClick, onSearchMovie, movieCard, onSaveMovie, isSaved, onDeleteMovie }) {
+function Movies({ onMenuClick, onSearchMovie, movieCard, onSaveMovie, isSaved, onDeleteMovie, onShowMoreButton }) {
     return (
         <>
             <Header className="header" onMenuClick={onMenuClick}>
@@ -13,7 +13,7 @@ function Movies({ onMenuClick, onSearchMovie, movieCard, onSaveMovie, isSaved, o
             <section className="movies">
                 <SearchForm onSearchMovie={onSearchMovie} />
                 <MoviesCardList movieCard={movieCard} OnSaveMovie={onSaveMovie} onDeleteMovie={onDeleteMovie} isSaved={isSaved} />
-                <button className="movies__button" type="button">Ещё</button>
+                <button className="movies__button" onClick={onShowMoreButton} type="button">Ещё</button>
             </section>
             <Footer />
         </>

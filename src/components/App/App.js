@@ -22,6 +22,8 @@ function App() {
   const [movieCard, setMovieCard] = useState([])
   const [savedMovies, setSavedMovies] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [moreCards, setMoreCards] = useState(0)
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
   const navigate = useNavigate()
 
   // Проверка Токена
@@ -43,13 +45,13 @@ function App() {
         .catch((err) => {
           console.log(`Ошибка: ${err}`);
         });
-      moviesApi.getMovies()
-        .then((res) => {
-          setMovieCard(res)
-        })
-        .catch((err) => {
-          console.log(`Ошибка: ${err}`);
-        });
+      // moviesApi.getMovies()
+      //   .then((res) => {
+      //     setMovieCard(res)
+      //   })
+      //   .catch((err) => {
+      //     console.log(`Ошибка: ${err}`);
+      //   });
       mainApi.getMovies()
         .then((res) => {
           setSavedMovies(res)
@@ -152,10 +154,44 @@ function App() {
       .then((movies) => {
         const searchedMovies = movies.filter((item) => item.nameRU.includes(movieName))
         const foundMovies = checkbox ? searchedMovies.filter((item) => item.duration <= 40) : searchedMovies
-        setMovieCard(foundMovies)
+        localStorage.setItem('foundMovies', JSON.stringify(foundMovies))
+        // localStorage.setItem('searchMovieName', movieName)
+        // localStorage.setItem('shortFilms', checkbox)
+        // setMovieCard(foundMovies)
+        handleResize()
       })
   }
 
+  useEffect(() => {
+    window.addEventListener('resize', checkWindowWidth)
+    handleResize()
+  }, [windowWidth])
+
+  function handleResize() {
+    const foundMovies = JSON.parse(localStorage.getItem('foundMovies'))
+    if (foundMovies === null) {
+      return
+    }
+    if (windowWidth > 768) {
+      setMovieCard(foundMovies.slice(0, 12))
+      setMoreCards(3)
+    } else if (windowWidth <= 768) {
+      setMovieCard(foundMovies.slice(0, 8))
+      setMoreCards(2)
+    } else if (windowWidth <= 480) {
+      setMovieCard(foundMovies.slice(0, 5))
+      setMoreCards(2)
+    }
+  }
+
+  function checkWindowWidth() {
+    setWindowWidth(window.innerWidth)
+  }
+
+  function handleShowMore() {
+    const foundMovies = JSON.parse(localStorage.getItem('foundMovies'))
+    setMovieCard(foundMovies.slice(0, movieCard.length + moreCards))
+  }
 
   return (
     <div className="App">
@@ -174,6 +210,7 @@ function App() {
               onSaveMovie={handleCardSave}
               onDeleteMovie={handleDeleteCard}
               onSearchMovie={handleSearchMovie}
+              onShowMoreButton={handleShowMore}
             />
           } />
           <Route path='/saved-movies' element={
