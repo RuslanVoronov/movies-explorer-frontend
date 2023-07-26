@@ -103,7 +103,7 @@ class Api {
 };
 
 const mainApi = new Api({
-    baseUrl: 'http://api.films.nomoreparties.sbs',
+    baseUrl: 'https://api.films.nomoreparties.sbs',
     credentials: "include",
     headers: {
         'Content-Type': 'application/json'
