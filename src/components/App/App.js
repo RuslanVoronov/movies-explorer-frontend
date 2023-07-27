@@ -66,7 +66,15 @@ function App() {
   function handleRegister(value) {
     mainApi.register(value)
       .then(() => {
-        navigate("/signin")
+        mainApi.authorize(value)
+          .then((res) => {
+            setLoggedIn(true)
+            if (res.token) {
+              localStorage.setItem("token", res.token)
+              setLoggedIn(true)
+              navigate("/movies")
+            }
+          })
       })
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
@@ -78,7 +86,6 @@ function App() {
     mainApi.authorize(data)
       .then((res) => {
         setLoggedIn(true)
-        console.log(res)
         if (res.token) {
           localStorage.setItem("token", res.token)
           setLoggedIn(true)
@@ -96,6 +103,7 @@ function App() {
     setLoggedIn(false)
     localStorage.removeItem('token');
     localStorage.removeItem('jwt');
+    navigate("/")
   }
 
   //  сохранение карточек

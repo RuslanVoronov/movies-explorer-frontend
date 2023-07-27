@@ -42,9 +42,11 @@ function MoviesCard({ movieCardInfo, OnSaveMovie, onDeleteMovie, isSaved }) {
                     }
                 </div>
             </div>
-            <img className="movie-card__image"
-                src={pathname === '/movies' ? `https://api.nomoreparties.co${movieCardInfo.image.url}` : movieCardInfo.image}
-                alt={movieCardInfo.nameRU} />
+            <a className='movie-card__link' href={movieCardInfo.trailerLink}>
+                <img className="movie-card__image"
+                    src={pathname === '/movies' ? `https://api.nomoreparties.co${movieCardInfo.image.url}` : movieCardInfo.image}
+                    alt={movieCardInfo.nameRU} />
+            </a>
         </li>
     );
 }
