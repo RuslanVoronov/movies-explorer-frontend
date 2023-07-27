@@ -1,13 +1,23 @@
 import './SearchForm.css'
 import { useForm } from '../../hooks/useForm';
+import { useEffect } from 'react';
 
-function SearchForm({ onSearchMovie }) {
+function SearchForm({ onSearchMovie, onInfoTooltip }) {
 
-    const { values, handleChange, checkbox, handleChangeCheckBox } = useForm({})
+    const movieName = localStorage.getItem('searchMovieName');
+    const { values, handleChange, checkbox, handleChangeCheckBox } = useForm({ movieName })
 
+    useEffect(() => {
+        onSearchMovie("а", checkbox);
+    }, [checkbox])
 
     function handleSubmit(e) {
         e.preventDefault();
+
+        if (!values.movieName) {
+            onInfoTooltip("Нужно ввести ключевое слово")
+            return
+        }
         // Передаём значения управляемых компонентов во внешний обработчик
         onSearchMovie(values.movieName, checkbox);
     }
@@ -15,7 +25,7 @@ function SearchForm({ onSearchMovie }) {
     return (
         <section className="search">
             <div className='search__container'>
-                <form className="search__form" onSubmit={handleSubmit}>
+                <form className="search__form" onSubmit={handleSubmit} noValidate>
                     <div className="search__icon"></div>
                     <input className="search__input" placeholder="Фильм" type="text" value={values.movieName} onChange={handleChange}
                         id="movie" name='movieName' required />
