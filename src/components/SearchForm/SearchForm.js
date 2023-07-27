@@ -7,10 +7,6 @@ function SearchForm({ onSearchMovie, onInfoTooltip }) {
     const movieName = localStorage.getItem('searchMovieName');
     const { values, handleChange, checkbox, handleChangeCheckBox } = useForm({ movieName })
 
-    useEffect(() => {
-        onSearchMovie("а", checkbox);
-    }, [checkbox])
-
     function handleSubmit(e) {
         e.preventDefault();
 
