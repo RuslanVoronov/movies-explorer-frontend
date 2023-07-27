@@ -18,6 +18,10 @@
     line-height: normal;
 }
 
+.movies__button_hidden {
+    visibility: hidden;
+}
+
 .movies__button:hover {
     cursor: pointer;
     opacity: .6;

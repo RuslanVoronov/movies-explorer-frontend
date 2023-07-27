@@ -5,13 +5,13 @@ import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList"
 import '../Movies/Movies.css'
 
-function SavedMovies({ onMenuClick, movieCard, onDeleteMovie, isSaved, onSearchMovie }) {
+function SavedMovies({ onMenuClick, movieCard, onDeleteMovie, isSaved, onSearchMovie, onInfoTooltip }) {
     return (
         <>
             <Header className="header" onMenuClick={onMenuClick}>
             </Header>
             <section className="movies">
-                <SearchForm onSearchMovie={onSearchMovie} />
+                <SearchForm onSearchMovie={onSearchMovie} onInfoTooltip={onInfoTooltip}/>
                 <MoviesCardList movieCard={movieCard} onDeleteMovie={onDeleteMovie} isSaved={isSaved} />
             </section>
             <Footer />

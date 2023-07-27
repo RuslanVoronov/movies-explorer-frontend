@@ -4,7 +4,7 @@ import Header from '../Header/Header';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { useForm } from '../../hooks/useForm';
 
-function Profile({ onMenuClick, signOut, onEditProfile }) {
+function Profile({ onMenuClick, signOut, onEditProfile, onInfoTooltip }) {
     const currentUser = useContext(CurrentUserContext);
     const { values, handleChange, setIsValid, isValid } = useForm(currentUser)
 

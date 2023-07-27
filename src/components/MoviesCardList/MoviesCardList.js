@@ -11,6 +11,7 @@ function MoviesCardList({ movieCard, OnSaveMovie, onDeleteMovie, isSaved }) {
                     movieCard.map((movie) => {
                         return (
                             <MoviesCard
+                                key={movie._id || movie.id}
                                 isSaved={isSaved}
                                 movieCardInfo={movie}
                                 OnSaveMovie={OnSaveMovie}
