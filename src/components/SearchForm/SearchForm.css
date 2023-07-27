@@ -38,7 +38,7 @@
     width: 100%;
 }
 
-.search__input:focus{
+.search__input:focus {
     border-bottom: 1px solid #4285f4;
 }
 
@@ -93,7 +93,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #2BE080;
+    background-color: #fff;
     -webkit-transition: 0.4s;
     transition: 0.4s;
     border-radius: 50px;
@@ -107,7 +107,7 @@
     width: 16px;
     left: 3px;
     top: 2px;
-    background-color: #fff;
+    background-color: #2BE080;
     -webkit-transition: 0.4s;
     transition: 0.4s;
     border-radius: 50%;
@@ -116,6 +116,10 @@
 .search__invisible-checkbox:checked+.search__visible-checkbox::before {
     transform: translateX(15px);
     background-color: #fff;
+}
+
+.search__invisible-checkbox:checked+.search__visible-checkbox {
+    background-color: #2BE080;
 }
 
 @media (max-width:768px) {

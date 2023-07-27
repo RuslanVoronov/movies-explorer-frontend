@@ -24,6 +24,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [moreCards, setMoreCards] = useState(0)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+  const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
 
   // Проверка Токена
@@ -158,16 +159,21 @@ function App() {
 
   // Форма поиска
   function handleSearchMovie(movieName, checkbox) {
+    setIsLoading(true)
     moviesApi.getMovies()
       .then((movies) => {
-        const searchedMovies = movies.filter((item) => item.nameRU.includes(movieName))
+        const searchedMovies = movies.filter((item) => item.nameRU.toLowerCase().includes(movieName.toLowerCase()))
         const foundMovies = checkbox ? searchedMovies.filter((item) => item.duration <= 40) : searchedMovies
         localStorage.setItem('foundMovies', JSON.stringify(foundMovies))
-        // localStorage.setItem('searchMovieName', movieName)
-        // localStorage.setItem('shortFilms', checkbox)
-        // setMovieCard(foundMovies)
+        localStorage.setItem('searchMovieName', movieName)
+        localStorage.setItem('shortFilms', checkbox)
+        setMovieCard(foundMovies)
         handleResize()
       })
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+      })
+      .finally(() => setIsLoading(false))
   }
 
   useEffect(() => {
@@ -219,6 +225,7 @@ function App() {
               onDeleteMovie={handleDeleteCard}
               onSearchMovie={handleSearchMovie}
               onShowMoreButton={handleShowMore}
+              isLoading={isLoading}
             />
           } />
           <Route path='/saved-movies' element={
@@ -230,6 +237,7 @@ function App() {
               onMenuClick={handleMenuClick}
               onDeleteMovie={handleDeleteCard}
               onSearchMovie={handleSearchMovie}
+              isLoading={isLoading}
             />
           }
           />

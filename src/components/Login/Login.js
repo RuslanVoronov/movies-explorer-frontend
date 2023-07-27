@@ -24,7 +24,7 @@ function Login({ onLogin, handleLoggedIn }) {
                             <p className="form__text">E-mail</p>
                             <input className={`${errors.email ? 'form__input form__input_error' : 'form__input'}`}
                                 value={values.email || ''} onChange={handleChange}
-                                name='email' minLength="2"
+                                name='email' minLength="2" type='email'
                                 maxLength="40" required />
                             <span className="form__error-message" id="email-error">{errors.email}</span>
                         </div>
