@@ -202,7 +202,6 @@ function App() {
   useEffect(() => {
     window.addEventListener('resize', checkWindowWidth)
     handleResize()
-    window.removeEventListener('resize', checkWindowWidth)
   }, [windowWidth])
 
   function handleResize() {
@@ -227,6 +226,7 @@ function App() {
 
   function checkWindowWidth() {
     setWindowWidth(window.innerWidth)
+    window.removeEventListener('resize', checkWindowWidth)
   }
 
   function handleShowMore() {
@@ -236,7 +236,6 @@ function App() {
     console.log(foundMovies.length, movieCard.length)
     setIsAllMoviesShown(foundMovies.length > movieCard.length)
   }
-  console.log(isAllMoviesShown)
   return (
     <div className="App">
       <CurrentUserContext.Provider value={currentUser}>
