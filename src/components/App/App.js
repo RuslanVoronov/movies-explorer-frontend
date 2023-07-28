@@ -14,6 +14,7 @@ import InfoToolTip from '../InfoToolTip/InfoTooltip';
 import moviesApi from '../../utils/MoviesApi';
 import mainApi from '../../utils/MainApi';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import AuthProtectedRoute from '../AuthProtectedRoute/AuthProtectedRoute';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function App() {
@@ -284,9 +285,22 @@ function App() {
             />
           }
           />
-
-          <Route path='/signin' element={<Login onLogin={handleLogin} isLoading={isLoading} />} />
-          <Route path='/signup' element={<Register onRegister={handleRegister} isLoading={isLoading} />} />
+          <Route path='/signin' element={
+            <AuthProtectedRoute
+              element={Login}
+              loggedIn={loggedIn}
+              onLogin={handleLogin}
+              isLoading={isLoading} />
+          }
+          />
+          <Route path='/signup' element={
+            <AuthProtectedRoute
+              element={Register}
+              loggedIn={loggedIn}
+              onRegister={handleRegister}
+              isLoading={isLoading} />
+          }
+          />
         </Routes>
         <MenuPopup onClose={closePopup} onMenu={handleMenuClick} isPopupOpen={isMenuPopupOpened} />
         <InfoToolTip text={popupText} isOpen={isInfoToolTopOpened} onClose={closePopup} />
