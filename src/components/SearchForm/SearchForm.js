@@ -1,10 +1,8 @@
 import './SearchForm.css'
 import { useForm } from '../../hooks/useForm';
-import { useEffect } from 'react';
 
 function SearchForm({ onSearchMovie, onInfoTooltip, onCheckBox }) {
     const { values, handleChange, checkbox, handleChangeCheckBox } = useForm({})
-    // const searchedMovies = JSON.parse(localStorage.getItem('searchedMovies'))
 
     function handleCheckBox() {
         onCheckBox(!checkbox)

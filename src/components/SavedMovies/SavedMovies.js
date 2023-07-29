@@ -4,20 +4,14 @@ import '../Header/Header.css'
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList"
 import '../Movies/Movies.css'
-import { useEffect } from 'react';
 
 
 function SavedMovies({ onMenuClick, onDeleteMovie, isSaved, onInfoTooltip, onResize, savedMovies, setSavedMovies }) {
 
     const movies = JSON.parse(localStorage.getItem('savedMovies'))
 
-    useEffect(() => {
-        setSavedMovies(movies)
-    }, [])
-
     function handleSearchSavedMovie(movieName) {
         const searchedMovies = movies.filter((item) => item.nameRU.toLowerCase().includes(movieName.toLowerCase()))
-        // const foundMovies = checkbox ? searchedMovies.filter((item) => item.duration <= 40) : searchedMovies
         if (searchedMovies.length === 0) {
             onInfoTooltip("Ничего не найдено")
             return

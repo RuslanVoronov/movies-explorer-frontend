@@ -28,20 +28,13 @@ function Movies({ onMenuClick, onSaveMovie, isSaved, onDeleteMovie,
         setMovieCard(foundMovies);
     }
 
-    // const defaultSearchText = localStorage.getItem('searchText') ?? '';
-    // const defaultCheckbox = JSON.parse(localStorage.getItem('areShortiesSeleted')) ?? false;
-    // const defaultFoundMovies = JSON.parse(localStorage.getItem('foundMovies')) ?? [];
-
     return (
         <>
             <Header className="header" onMenuClick={onMenuClick}>
             </Header>
             <section className="movies">
-                <SearchForm onSearchMovie={handleSearchMovie} onInfoTooltip={onInfoTooltip} onCheckBox={handleCheckbox}
-                    // defaultSearchText={defaultSearchText} defaultCheckbox={defaultCheckbox}
-                    // defaultFoundMovies={defaultFoundMovies}
-                />
-                {isLoading ? (
+                <SearchForm onSearchMovie={handleSearchMovie} onInfoTooltip={onInfoTooltip} onCheckBox={handleCheckbox} />
+                {!isLoading ? (
                     <Preloader />
                 ) : (
                     <>

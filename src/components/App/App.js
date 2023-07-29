@@ -50,32 +50,21 @@ function App() {
           localStorage.setItem('movies', JSON.stringify(res))
         })
         .catch((err) => {
-          setIsLoading(false)
           console.log(`Ошибка: ${err}`);
-        })
-        .finally(() => {
-          setIsLoading(false)
         });
       mainApi.getUserInfo()
         .then((res) => {
-          setIsLoading(true)
           setCurrentUser(res)
         })
         .catch((err) => {
-          setIsLoading(false)
           console.log(`Ошибка: ${err}`);
-        })
-        .finally(() => {
-          setIsLoading(false)
         });
       mainApi.getMovies()
         .then((res) => {
-          setIsLoading(true)
           setSavedMovies(res)
           localStorage.setItem('savedMovies', JSON.stringify(res))
         })
         .catch((err) => {
-          setIsLoading(false)
           console.log(`Ошибка: ${err}`)
         })
         .finally(() => {
@@ -131,12 +120,7 @@ function App() {
   function handleSignOut() {
     mainApi.signOut()
     setLoggedIn(false)
-    localStorage.removeItem('token');
-    localStorage.removeItem('jwt');
-    localStorage.removeItem('foundMovies');
-    localStorage.removeItem('searchMovieName');
-    localStorage.removeItem('shortFilms');
-    localStorage.removeItem('movies');
+    localStorage.clear();
     navigate("/")
   }
 
@@ -145,6 +129,7 @@ function App() {
     mainApi.addMovie(movie)
       .then((movieData) => {
         setSavedMovies([...savedMovies, movieData])
+        // localStorage.setItem('savedMovies', savedMovies)
       })
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
