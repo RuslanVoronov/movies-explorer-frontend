@@ -16,7 +16,7 @@ function SearchForm({ onSearchMovie, onInfoTooltip, onCheckBox }) {
             return
         }
         // Передаём значения управляемых компонентов во внешний обработчик
-        onSearchMovie(values.movieName);
+        onSearchMovie(values.movieName, checkbox);
     }
 
     return (

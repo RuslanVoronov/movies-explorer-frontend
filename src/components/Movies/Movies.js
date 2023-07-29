@@ -9,20 +9,21 @@ import Preloader from "../Preloader/Preloader";
 function Movies({ onMenuClick, onSaveMovie, isSaved, onDeleteMovie,
     onShowMoreButton, isLoading, onInfoTooltip, isAllMoviesShown, onResize, movieCard, setMovieCard }) {
     // Форма поиска
-    function handleSearchMovie(movieName) {
+    function handleSearchMovie(movieName, checkbox) {
         const movies = JSON.parse(localStorage.getItem('movies'))
         const searchedMovies = movies.filter((item) => item.nameRU.toLowerCase().includes(movieName.toLowerCase()))
-        if (searchedMovies.length === 0) {
+        const foundMovies = checkbox ? searchedMovies.filter((item) => item.duration <= 40) : searchedMovies
+        if (foundMovies.length === 0) {
             onInfoTooltip("Ничего не найдено")
             return
         }
-        localStorage.setItem('foundMovies', JSON.stringify(searchedMovies))
-        localStorage.setItem('searchMovieName', movieName)
-        setMovieCard(searchedMovies)
+        localStorage.setItem('foundMovies', JSON.stringify(foundMovies))
+        localStorage.setItem('searchedMovies', JSON.stringify(searchedMovies))
+        setMovieCard(foundMovies)
         onResize()
     }
     function handleCheckbox(checkbox) {
-        const movies = JSON.parse(localStorage.getItem('foundMovies'));
+        const movies = JSON.parse(localStorage.getItem('searchedMovies'));
         const foundMovies = checkbox ? movies.filter((item) => item.duration <= 40) : movies
         localStorage.setItem('checkbox', checkbox)
         setMovieCard(foundMovies);

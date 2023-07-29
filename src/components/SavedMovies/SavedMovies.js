@@ -10,7 +10,7 @@ function SavedMovies({ onMenuClick, onDeleteMovie, isSaved, onInfoTooltip, onRes
 
     const movies = JSON.parse(localStorage.getItem('savedMovies'))
 
-    function handleSearchSavedMovie(movieName) {
+    function handleSearchSavedMovie(movieName, checkbox) {
         const searchedMovies = movies.filter((item) => item.nameRU.toLowerCase().includes(movieName.toLowerCase()))
         if (searchedMovies.length === 0) {
             onInfoTooltip("Ничего не найдено")
