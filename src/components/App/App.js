@@ -50,6 +50,7 @@ function App() {
           localStorage.setItem('movies', JSON.stringify(res))
         })
         .catch((err) => {
+          setIsLoading(false)
           console.log(`Ошибка: ${err}`);
         })
         .finally(() => {
@@ -57,17 +58,28 @@ function App() {
         });
       mainApi.getUserInfo()
         .then((res) => {
+          setIsLoading(true)
           setCurrentUser(res)
         })
         .catch((err) => {
+          setIsLoading(false)
           console.log(`Ошибка: ${err}`);
+        })
+        .finally(() => {
+          setIsLoading(false)
         });
       mainApi.getMovies()
         .then((res) => {
+          setIsLoading(true)
           setSavedMovies(res)
+          localStorage.setItem('savedMovies', JSON.stringify(res))
         })
         .catch((err) => {
+          setIsLoading(false)
           console.log(`Ошибка: ${err}`)
+        })
+        .finally(() => {
+          setIsLoading(false)
         });
     }
   }, [loggedIn]);
@@ -88,6 +100,7 @@ function App() {
           })
       })
       .catch((err) => {
+        setIsLoading(false)
         console.log(err);
         handleInfoTooltipOpen("Что-то пошло не так! Попробуйте ещё раз.");
       })
@@ -107,6 +120,7 @@ function App() {
         }
       })
       .catch((err) => {
+        setIsLoading(false)
         console.log(err)
         handleInfoTooltipOpen("Что-то пошло не так! Попробуйте ещё раз.");
       })
@@ -183,23 +197,6 @@ function App() {
     return savedMovies.some(item => item.movieId === movie.id && item.owner === currentUser._id)
   }
 
-
-  // Форма поиска
-  function handleSearchMovie(movieName, checkbox) {
-    const movies = JSON.parse(localStorage.getItem('movies'))
-    const searchedMovies = movies.filter((item) => item.nameRU.toLowerCase().includes(movieName.toLowerCase()))
-    const foundMovies = checkbox ? searchedMovies.filter((item) => item.duration <= 40) : searchedMovies
-    if (foundMovies.length === 0) {
-      handleInfoTooltipOpen("Ничего не найдено")
-      return
-    }
-    localStorage.setItem('foundMovies', JSON.stringify(foundMovies))
-    localStorage.setItem('searchMovieName', movieName)
-    localStorage.setItem('shortFilms', checkbox)
-    setMovieCard(foundMovies)
-    handleResize()
-  }
-
   useEffect(() => {
     window.addEventListener('resize', checkWindowWidth)
     handleResize()
@@ -231,7 +228,6 @@ function App() {
   }
 
   function handleShowMore() {
-
     const foundMovies = JSON.parse(localStorage.getItem('foundMovies'))
     setMovieCard(foundMovies.slice(0, movieCard.length + moreCards))
     console.log(foundMovies.length, movieCard.length)
@@ -250,12 +246,13 @@ function App() {
               element={Movies}
               onMenuClick={handleMenuClick}
               movieCard={movieCard}
+              setMovieCard={setMovieCard}
               isSaved={isSaved}
               onSaveMovie={handleCardSave}
               onDeleteMovie={handleDeleteCard}
-              onSearchMovie={handleSearchMovie}
               onShowMoreButton={handleShowMore}
               onInfoTooltip={handleInfoTooltipOpen}
+              onResize={handleResize}
               isLoading={isLoading}
               isAllMoviesShown={isAllMoviesShown}
             />
@@ -264,12 +261,13 @@ function App() {
             <ProtectedRoute
               loggedIn={loggedIn}
               element={SavedMovies}
-              movieCard={savedMovies}
+              savedMovies={savedMovies}
+              setSavedMovies={setSavedMovies}
               isSaved={isSaved}
               onMenuClick={handleMenuClick}
               onDeleteMovie={handleDeleteCard}
-              onSearchMovie={handleSearchMovie}
               onInfoTooltip={handleInfoTooltipOpen}
+              onResize={handleResize}
               isLoading={isLoading}
             />
           }

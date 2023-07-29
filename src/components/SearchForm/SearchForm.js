@@ -2,10 +2,13 @@ import './SearchForm.css'
 import { useForm } from '../../hooks/useForm';
 import { useEffect } from 'react';
 
-function SearchForm({ onSearchMovie, onInfoTooltip }) {
+function SearchForm({ onSearchMovie, onInfoTooltip, onCheckBox }) {
+    const { values, handleChange, checkbox, handleChangeCheckBox } = useForm({})
+    // const searchedMovies = JSON.parse(localStorage.getItem('searchedMovies'))
 
-    const movieName = localStorage.getItem('searchMovieName');
-    const { values, handleChange, checkbox, handleChangeCheckBox } = useForm({ movieName })
+    function handleCheckBox() {
+        onCheckBox(!checkbox)
+    }
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -15,7 +18,7 @@ function SearchForm({ onSearchMovie, onInfoTooltip }) {
             return
         }
         // Передаём значения управляемых компонентов во внешний обработчик
-        onSearchMovie(values.movieName, checkbox);
+        onSearchMovie(values.movieName);
     }
 
     return (
@@ -29,7 +32,7 @@ function SearchForm({ onSearchMovie, onInfoTooltip }) {
                 </form>
                 <div className="search__toggle">
                     <label className="search__tumbler">
-                        <input type="checkbox" onChange={handleChangeCheckBox} className="search__invisible-checkbox" />
+                        <input type="checkbox" onChange={handleChangeCheckBox} onClick={handleCheckBox} className="search__invisible-checkbox" />
                         <span className="search__visible-checkbox" />
                     </label>
                     <p className="search__text">Короткометражки</p>

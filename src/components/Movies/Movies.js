@@ -6,13 +6,41 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList"
 import './Movies.css'
 import Preloader from "../Preloader/Preloader";
 
-function Movies({ onMenuClick, onSearchMovie, movieCard, onSaveMovie, isSaved, onDeleteMovie, onShowMoreButton, isLoading, onInfoTooltip, isAllMoviesShown }) {
+function Movies({ onMenuClick, onSaveMovie, isSaved, onDeleteMovie,
+    onShowMoreButton, isLoading, onInfoTooltip, isAllMoviesShown, onResize, movieCard, setMovieCard }) {
+    // Форма поиска
+    function handleSearchMovie(movieName) {
+        const movies = JSON.parse(localStorage.getItem('movies'))
+        const searchedMovies = movies.filter((item) => item.nameRU.toLowerCase().includes(movieName.toLowerCase()))
+        if (searchedMovies.length === 0) {
+            onInfoTooltip("Ничего не найдено")
+            return
+        }
+        localStorage.setItem('foundMovies', JSON.stringify(searchedMovies))
+        localStorage.setItem('searchMovieName', movieName)
+        setMovieCard(searchedMovies)
+        onResize()
+    }
+    function handleCheckbox(checkbox) {
+        const movies = JSON.parse(localStorage.getItem('foundMovies'));
+        const foundMovies = checkbox ? movies.filter((item) => item.duration <= 40) : movies
+        localStorage.setItem('checkbox', checkbox)
+        setMovieCard(foundMovies);
+    }
+
+    // const defaultSearchText = localStorage.getItem('searchText') ?? '';
+    // const defaultCheckbox = JSON.parse(localStorage.getItem('areShortiesSeleted')) ?? false;
+    // const defaultFoundMovies = JSON.parse(localStorage.getItem('foundMovies')) ?? [];
+
     return (
         <>
             <Header className="header" onMenuClick={onMenuClick}>
             </Header>
             <section className="movies">
-                <SearchForm onSearchMovie={onSearchMovie} onInfoTooltip={onInfoTooltip} />
+                <SearchForm onSearchMovie={handleSearchMovie} onInfoTooltip={onInfoTooltip} onCheckBox={handleCheckbox}
+                    // defaultSearchText={defaultSearchText} defaultCheckbox={defaultCheckbox}
+                    // defaultFoundMovies={defaultFoundMovies}
+                />
                 {isLoading ? (
                     <Preloader />
                 ) : (
