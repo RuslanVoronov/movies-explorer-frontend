@@ -53,7 +53,7 @@ function App() {
           console.log(`Ошибка: ${err}`);
         })
         .finally(() => {
-          setIsLoading(false)
+          setIsLoading(true)
         });
       mainApi.getUserInfo()
         .then((res) => {

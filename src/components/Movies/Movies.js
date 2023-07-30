@@ -25,7 +25,7 @@ function Movies({ onMenuClick, onSaveMovie, isSaved, onDeleteMovie,
         onResize()
     }
     function handleCheckbox(checkbox) {
-        const movies = JSON.parse(localStorage.getItem('searchedMovies'));
+        const movies = JSON.parse(localStorage.getItem('searchedMovies')) ?? [];
         const foundMovies = checkbox ? movies.filter((item) => item.duration <= 40) : movies
         if (foundMovies.length === 0) {
             onInfoTooltip("Ничего не найдено")
@@ -50,7 +50,7 @@ function Movies({ onMenuClick, onSaveMovie, isSaved, onDeleteMovie,
                     onInfoTooltip={onInfoTooltip}
                     onCheckBox={handleCheckbox}
                     defaultValues={defaultValues} />
-                {!isLoading ? (
+                {!(isLoading) ? (
                     <Preloader />
                 ) : (
                     <>
