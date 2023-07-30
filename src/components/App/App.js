@@ -49,19 +49,19 @@ function App() {
           localStorage.setItem('movies', JSON.stringify(res))
         })
         .catch((err) => {
+          setIsLoading(false)
           console.log(`Ошибка: ${err}`);
         })
         .finally(() => {
+          setIsLoading(false)
         });
       mainApi.getUserInfo()
         .then((res) => {
-          setCurrentUser(res)
         })
         .catch((err) => {
           console.log(`Ошибка: ${err}`);
         })
         .finally(() => {
-          setIsLoading(false)
         });
     }
   }, [loggedIn]);
@@ -83,7 +83,7 @@ function App() {
       .catch((err) => {
         setIsLoading(false)
         handleInfoTooltipOpen("Что-то пошло не так! Попробуйте ещё раз.");
-        console.log(err);        
+        console.log(err);
       })
       .finally(() => setIsLoading(false))
   }
