@@ -22,20 +22,23 @@ function Movies({ onMenuClick, onSaveMovie, isSaved, onDeleteMovie,
         localStorage.setItem('checkbox', checkbox)
         localStorage.setItem('searchedMovieName', movieName)
         setMovieCard(foundMovies)
-        // onResize()
+        onResize()
     }
-console.log(movieCard)
     function handleCheckbox(checkbox) {
         const movies = JSON.parse(localStorage.getItem('searchedMovies'));
-        localStorage.setItem('checkbox', checkbox)
         const foundMovies = checkbox ? movies.filter((item) => item.duration <= 40) : movies
+        if (foundMovies.length === 0) {
+            onInfoTooltip("Ничего не найдено")
+            return
+        }
         localStorage.setItem('foundMovies', JSON.stringify(foundMovies))
+        localStorage.setItem('checkbox', checkbox)
         setMovieCard(foundMovies);
+        onResize()
     }
-
+    const foundMovies = localStorage.getItem('foundMovies') ?? "{}";
     const movieName = localStorage.getItem('searchedMovieName') ?? '';
-    const checkbox = JSON.parse(localStorage.getItem('checkbox')) ?? false;
-
+    const checkbox = localStorage.getItem('checkbox') ?? false;
     const defaultValues = { movieName, checkbox }
     return (
         <>
@@ -56,9 +59,8 @@ console.log(movieCard)
                             OnSaveMovie={onSaveMovie}
                             onDeleteMovie={onDeleteMovie}
                             isSaved={isSaved}
-                            isAllMoviesShown={isAllMoviesShown}
-                            onShowMoreButton={onShowMoreButton}
                         />
+                        {(movieCard.length < JSON.parse(foundMovies).length) && < button className={"movies__button"} onClick={onShowMoreButton} type="button">Ещё</button >}
                     </>
                 )
                 }

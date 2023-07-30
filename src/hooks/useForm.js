@@ -11,9 +11,9 @@ export function useForm(inputValues) {
         const { value, name } = event.target;
         setValues({ ...values, [name]: value });
         setErrors({ ...errors, [name]: event.target.validationMessage });
+        setIsValid(event.target.closest('form').checkValidity() && EMAIL_REGEXP.test(values.email));
         if (name === "email") {
             if (!EMAIL_REGEXP.test(value)) {
-                setIsValid(false)
                 setErrors({
                     ...errors,
                     'email': 'Формат почты неправильный'
@@ -21,7 +21,6 @@ export function useForm(inputValues) {
                 return
             }
         }
-        setIsValid(event.target.closest('form').checkValidity() && EMAIL_REGEXP.test(values.email));
     };
     const handleChangeCheckBox = (event) => {
         setCheckbox(event.target.checked)

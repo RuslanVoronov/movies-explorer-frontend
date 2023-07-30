@@ -16,21 +16,20 @@ import mainApi from '../../utils/MainApi';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import AuthProtectedRoute from '../AuthProtectedRoute/AuthProtectedRoute';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-
+// JSON.parse(localStorage.getItem('foundMovies') ?? 
 function App() {
-
   const [currentUser, setCurrentUser] = useState({});
   const [isMenuPopupOpened, setIsMenuPopupOpened] = useState(false);
   const [isInfoToolTopOpened, setIsInfoToolTopOpened] = useState(false);
-  const [movieCard, setMovieCard] = useState(JSON.parse(localStorage.getItem('foundMovies') ?? []))
+  const [movieCard, setMovieCard] = useState([])
   const [savedMovies, setSavedMovies] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
   const [moreCards, setMoreCards] = useState(0);
   const [popupText, setPopupText] = useState("");
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [isLoading, setIsLoading] = useState(false);
   const [isAllMoviesShown, setIsAllMoviesShown] = useState(false);
   const navigate = useNavigate();
+  const windowWidth = window.innerWidth
 
   // Проверка Токена
   useEffect(() => {
@@ -51,6 +50,8 @@ function App() {
         })
         .catch((err) => {
           console.log(`Ошибка: ${err}`);
+        })
+        .finally(() => {
         });
       mainApi.getUserInfo()
         .then((res) => {
@@ -69,7 +70,6 @@ function App() {
   function handleRegister(value) {
     mainApi.register(value)
       .then(() => {
-        setIsLoading(true)
         mainApi.authorize(value)
           .then((res) => {
             setLoggedIn(true)
@@ -82,8 +82,8 @@ function App() {
       })
       .catch((err) => {
         setIsLoading(false)
-        console.log(err);
         handleInfoTooltipOpen("Что-то пошло не так! Попробуйте ещё раз.");
+        console.log(err);        
       })
       .finally(() => setIsLoading(false))
   }
@@ -92,20 +92,16 @@ function App() {
   function handleLogin(data) {
     mainApi.authorize(data)
       .then((res) => {
-        setIsLoading(true)
-        setLoggedIn(true)
         if (res.token) {
-          localStorage.setItem("token", res.token)
           setLoggedIn(true)
+          localStorage.setItem("token", res.token)
           navigate("/movies")
         }
       })
       .catch((err) => {
-        setIsLoading(false)
-        console.log(err)
         handleInfoTooltipOpen("Что-то пошло не так! Попробуйте ещё раз.");
+        console.log(err)
       })
-      .finally(() => setIsLoading(false))
   }
 
   // Выход
@@ -174,40 +170,30 @@ function App() {
   }
 
   useEffect(() => {
-    window.addEventListener('resize', checkWindowWidth)
-    // handleResize()
+    handleResize()
   }, [windowWidth])
 
-  function checkWindowWidth() {
-    setWindowWidth(window.innerWidth)
-    window.removeEventListener('resize', checkWindowWidth)
+  function handleResize() {
+    const foundMovies = JSON.parse(localStorage.getItem('foundMovies'))
+    if (foundMovies === null) {
+      return
+    }
+    if (windowWidth > 768) {
+      setMovieCard(foundMovies.slice(0, 12))
+      setMoreCards(3)
+    } else if (windowWidth <= 768) {
+      setMovieCard(foundMovies.slice(0, 8))
+      setMoreCards(2)
+    } else if (windowWidth <= 500) {
+      setMovieCard(foundMovies.slice(0, 5))
+      setMoreCards(2)
+    }
   }
 
-  // function handleResize() {
-  //   const foundMovies = JSON.parse(localStorage.getItem('foundMovies'))
-  //   if (foundMovies === null) {
-  //     return
-  //   }
-  //   if (windowWidth > 768) {
-  //     setMovieCard(foundMovies.slice(0, 12))
-  //     setMoreCards(3)
-  //     setIsAllMoviesShown(foundMovies.length > movieCard.length)
-  //   } else if (windowWidth <= 768) {
-  //     setMovieCard(foundMovies.slice(0, 8))
-  //     setMoreCards(2)
-  //     setIsAllMoviesShown(foundMovies.length > movieCard.length)
-  //   } else if (windowWidth <= 480) {
-  //     setMovieCard(foundMovies.slice(0, 5))
-  //     setMoreCards(2)
-  //     setIsAllMoviesShown(foundMovies.length > movieCard.length)
-  //   }
-  // }
-
-  // function handleShowMore() {
-  //   const foundMovies = JSON.parse(localStorage.getItem('foundMovies'))
-  //   setMovieCard(foundMovies.slice(0, movieCard.length + moreCards))
-  //   setIsAllMoviesShown(foundMovies.length > movieCard.length)
-  // }
+  function handleShowMore() {
+    const foundMovies = JSON.parse(localStorage.getItem('foundMovies'))
+    setMovieCard(foundMovies.slice(0, movieCard.length + moreCards))
+  }
 
   return (
     <div className="App">
@@ -226,8 +212,8 @@ function App() {
               isSaved={isSaved}
               onSaveMovie={handleCardSave}
               onDeleteMovie={handleDeleteCard}
-              // onShowMoreButton={handleShowMore}
-              // onResize={handleResize}
+              onShowMoreButton={handleShowMore}
+              onResize={handleResize}
               onInfoTooltip={handleInfoTooltipOpen}
               isLoading={isLoading}
               isAllMoviesShown={isAllMoviesShown}
@@ -243,7 +229,8 @@ function App() {
               onMenuClick={handleMenuClick}
               onDeleteMovie={handleDeleteCard}
               onInfoTooltip={handleInfoTooltipOpen}
-              // onResize={handleResize}
+              onResize={handleResize}
+              onShowMoreButton={handleShowMore}
               isLoading={isLoading}
               setIsLoading={setIsLoading}
             />
@@ -265,7 +252,8 @@ function App() {
               element={Login}
               loggedIn={loggedIn}
               onLogin={handleLogin}
-              isLoading={isLoading} />
+              isLoading={isLoading}
+              setIsLoading={setIsLoading} />
           }
           />
           <Route path='/signup' element={
@@ -273,7 +261,9 @@ function App() {
               element={Register}
               loggedIn={loggedIn}
               onRegister={handleRegister}
-              isLoading={isLoading} />
+              isLoading={isLoading}
+              setIsLoading={setIsLoading}
+            />
           }
           />
         </Routes>

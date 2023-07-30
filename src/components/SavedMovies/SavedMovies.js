@@ -8,7 +8,8 @@ import '../Movies/Movies.css'
 import { useEffect } from "react";
 
 
-function SavedMovies({ onMenuClick, onDeleteMovie, isSaved, onInfoTooltip, onResize, savedMovies, setSavedMovies, setIsLoading }) {
+function SavedMovies({ onMenuClick, onDeleteMovie, isSaved, onInfoTooltip,
+    onResize, savedMovies, setSavedMovies, setIsLoading, onShowMoreButton, isLoading }) {
 
     useEffect(() => {
         mainApi.getMovies()
@@ -32,13 +33,18 @@ function SavedMovies({ onMenuClick, onDeleteMovie, isSaved, onInfoTooltip, onRes
         }
         localStorage.setItem('foundSavedMovies', JSON.stringify(searchedMovies))
         setSavedMovies(searchedMovies)
-        // onResize()
+        onResize()
     }
 
     function handleCheckbox(checkbox) {
         const searchedMovies = JSON.parse(localStorage.getItem('foundSavedMovies')) ?? movies;
         const foundMovies = checkbox ? savedMovies.filter((item) => item.duration <= 40) : searchedMovies
+        if (foundMovies.length === 0) {
+            onInfoTooltip("Ничего не найдено")
+            return
+        }
         setSavedMovies(foundMovies);
+        onResize()
     }
 
     const defaultValues = { movieName: '', checkbox: false }
@@ -47,8 +53,15 @@ function SavedMovies({ onMenuClick, onDeleteMovie, isSaved, onInfoTooltip, onRes
             <Header className="header" onMenuClick={onMenuClick}>
             </Header>
             <section className="movies">
-                <SearchForm onSearchMovie={handleSearchSavedMovie} onInfoTooltip={onInfoTooltip} onCheckBox={handleCheckbox} defaultValues={defaultValues} />
-                <MoviesCardList movieCard={savedMovies} onDeleteMovie={onDeleteMovie} isSaved={isSaved} />
+                <SearchForm
+                    onSearchMovie={handleSearchSavedMovie}
+                    onInfoTooltip={onInfoTooltip}
+                    onCheckBox={handleCheckbox}
+                    defaultValues={defaultValues}
+                />
+                <MoviesCardList movieCard={savedMovies} onDeleteMovie={onDeleteMovie} isSaved={isSaved} onShowMoreButton={onShowMoreButton}
+                    foundMovies={movies} isLoading={isLoading}
+                />
             </section>
             <Footer />
         </>
