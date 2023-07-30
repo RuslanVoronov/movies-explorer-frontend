@@ -99,6 +99,7 @@ class Api {
             headers: this._headers,
         }).then(this._checkServer);
     }
+    // https://api.films.nomoreparties.sbs
 };
 const mainApi = new Api({
     baseUrl: 'https://api.films.nomoreparties.sbs',
