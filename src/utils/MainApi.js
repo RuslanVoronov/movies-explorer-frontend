@@ -99,10 +99,9 @@ class Api {
             headers: this._headers,
         }).then(this._checkServer);
     }
-    // https://api.films.nomoreparties.sbs
 };
 const mainApi = new Api({
-    baseUrl: 'http://localhost:3001',
+    baseUrl: 'https://api.films.nomoreparties.sbs',
     credentials: "include",
     headers: {
         'Content-Type': 'application/json'
