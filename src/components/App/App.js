@@ -57,15 +57,11 @@ function App() {
         });
       mainApi.getUserInfo()
         .then((res) => {
-          setIsLoading(true)
+          setCurrentUser(res)
         })
         .catch((err) => {
-          setIsLoading(false)
           console.log(`Ошибка: ${err}`);
         })
-        .finally(() => {
-          setIsLoading(false)
-        });
     }
   }, [loggedIn]);
 
