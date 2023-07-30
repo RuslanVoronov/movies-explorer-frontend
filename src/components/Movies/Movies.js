@@ -19,28 +19,46 @@ function Movies({ onMenuClick, onSaveMovie, isSaved, onDeleteMovie,
         }
         localStorage.setItem('foundMovies', JSON.stringify(foundMovies))
         localStorage.setItem('searchedMovies', JSON.stringify(searchedMovies))
+        localStorage.setItem('checkbox', checkbox)
+        localStorage.setItem('searchedMovieName', movieName)
         setMovieCard(foundMovies)
-        onResize()
+        // onResize()
     }
+console.log(movieCard)
     function handleCheckbox(checkbox) {
         const movies = JSON.parse(localStorage.getItem('searchedMovies'));
-        const foundMovies = checkbox ? movies.filter((item) => item.duration <= 40) : movies
         localStorage.setItem('checkbox', checkbox)
+        const foundMovies = checkbox ? movies.filter((item) => item.duration <= 40) : movies
+        localStorage.setItem('foundMovies', JSON.stringify(foundMovies))
         setMovieCard(foundMovies);
     }
 
+    const movieName = localStorage.getItem('searchedMovieName') ?? '';
+    const checkbox = JSON.parse(localStorage.getItem('checkbox')) ?? false;
+
+    const defaultValues = { movieName, checkbox }
     return (
         <>
             <Header className="header" onMenuClick={onMenuClick}>
             </Header>
             <section className="movies">
-                <SearchForm onSearchMovie={handleSearchMovie} onInfoTooltip={onInfoTooltip} onCheckBox={handleCheckbox} />
+                <SearchForm
+                    onSearchMovie={handleSearchMovie}
+                    onInfoTooltip={onInfoTooltip}
+                    onCheckBox={handleCheckbox}
+                    defaultValues={defaultValues} />
                 {!isLoading ? (
                     <Preloader />
                 ) : (
                     <>
-                        <MoviesCardList movieCard={movieCard} OnSaveMovie={onSaveMovie} onDeleteMovie={onDeleteMovie} isSaved={isSaved} />
-                        <button className={`${isAllMoviesShown ? "movies__button" : "movies__button movies__button_hidden"}`} onClick={onShowMoreButton} type="button">Ещё</button>
+                        <MoviesCardList
+                            movieCard={movieCard}
+                            OnSaveMovie={onSaveMovie}
+                            onDeleteMovie={onDeleteMovie}
+                            isSaved={isSaved}
+                            isAllMoviesShown={isAllMoviesShown}
+                            onShowMoreButton={onShowMoreButton}
+                        />
                     </>
                 )
                 }

@@ -1,8 +1,8 @@
 import './SearchForm.css'
 import { useForm } from '../../hooks/useForm';
 
-function SearchForm({ onSearchMovie, onInfoTooltip, onCheckBox }) {
-    const { values, handleChange, checkbox, handleChangeCheckBox } = useForm({})
+function SearchForm({ onSearchMovie, onInfoTooltip, onCheckBox, defaultValues }) {
+    const { values, handleChange, checkbox, handleChangeCheckBox } = useForm(defaultValues)
 
     function handleCheckBox() {
         onCheckBox(!checkbox)
@@ -30,13 +30,12 @@ function SearchForm({ onSearchMovie, onInfoTooltip, onCheckBox }) {
                 </form>
                 <div className="search__toggle">
                     <label className="search__tumbler">
-                        <input type="checkbox" onChange={handleChangeCheckBox} onClick={handleCheckBox} className="search__invisible-checkbox" />
+                        <input type="checkbox" checked={checkbox} onChange={handleChangeCheckBox} onClick={handleCheckBox} className="search__invisible-checkbox" />
                         <span className="search__visible-checkbox" />
                     </label>
                     <p className="search__text">Короткометражки</p>
                 </div>
             </div>
-
         </section>
     );
 }

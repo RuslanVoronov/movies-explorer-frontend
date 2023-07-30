@@ -34,8 +34,8 @@ function Login({ onLogin, isLoading }) {
                             <input className={`${errors.password ? 'form__input form__input_error' : 'form__input'}`}
                                 value={values.password || ''} onChange={handleChange}
                                 disabled={isLoading ? true : ''}
-                                name='password' minLength="2"
-                                type="password" maxLength="200" required />
+                                name='password' minLength="6"
+                                type="password" maxLength="30" required />
                             <span className="form__error-message" id="password-error">{errors.password}</span>
                         </div>
                     </div>

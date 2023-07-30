@@ -22,7 +22,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [isMenuPopupOpened, setIsMenuPopupOpened] = useState(false);
   const [isInfoToolTopOpened, setIsInfoToolTopOpened] = useState(false);
-  const [movieCard, setMovieCard] = useState([])
+  const [movieCard, setMovieCard] = useState(JSON.parse(localStorage.getItem('foundMovies') ?? []))
   const [savedMovies, setSavedMovies] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
   const [moreCards, setMoreCards] = useState(0);
@@ -58,14 +58,6 @@ function App() {
         })
         .catch((err) => {
           console.log(`Ошибка: ${err}`);
-        });
-      mainApi.getMovies()
-        .then((res) => {
-          setSavedMovies(res)
-          localStorage.setItem('savedMovies', JSON.stringify(res))
-        })
-        .catch((err) => {
-          console.log(`Ошибка: ${err}`)
         })
         .finally(() => {
           setIsLoading(false)
@@ -129,7 +121,6 @@ function App() {
     mainApi.addMovie(movie)
       .then((movieData) => {
         setSavedMovies([...savedMovies, movieData])
-        // localStorage.setItem('savedMovies', savedMovies)
       })
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
@@ -184,40 +175,40 @@ function App() {
 
   useEffect(() => {
     window.addEventListener('resize', checkWindowWidth)
-    handleResize()
+    // handleResize()
   }, [windowWidth])
-
-  function handleResize() {
-    const foundMovies = JSON.parse(localStorage.getItem('foundMovies'))
-    if (foundMovies === null) {
-      return
-    }
-    if (windowWidth > 768) {
-      setMovieCard(foundMovies.slice(0, 12))
-      setMoreCards(3)
-      setIsAllMoviesShown(foundMovies.length > movieCard.length)
-    } else if (windowWidth <= 768) {
-      setMovieCard(foundMovies.slice(0, 8))
-      setMoreCards(2)
-      setIsAllMoviesShown(foundMovies.length > movieCard.length)
-    } else if (windowWidth <= 480) {
-      setMovieCard(foundMovies.slice(0, 5))
-      setMoreCards(2)
-      setIsAllMoviesShown(foundMovies.length > movieCard.length)
-    }
-  }
 
   function checkWindowWidth() {
     setWindowWidth(window.innerWidth)
     window.removeEventListener('resize', checkWindowWidth)
   }
 
-  function handleShowMore() {
-    const foundMovies = JSON.parse(localStorage.getItem('foundMovies'))
-    setMovieCard(foundMovies.slice(0, movieCard.length + moreCards))
-    console.log(foundMovies.length, movieCard.length)
-    setIsAllMoviesShown(foundMovies.length > movieCard.length)
-  }
+  // function handleResize() {
+  //   const foundMovies = JSON.parse(localStorage.getItem('foundMovies'))
+  //   if (foundMovies === null) {
+  //     return
+  //   }
+  //   if (windowWidth > 768) {
+  //     setMovieCard(foundMovies.slice(0, 12))
+  //     setMoreCards(3)
+  //     setIsAllMoviesShown(foundMovies.length > movieCard.length)
+  //   } else if (windowWidth <= 768) {
+  //     setMovieCard(foundMovies.slice(0, 8))
+  //     setMoreCards(2)
+  //     setIsAllMoviesShown(foundMovies.length > movieCard.length)
+  //   } else if (windowWidth <= 480) {
+  //     setMovieCard(foundMovies.slice(0, 5))
+  //     setMoreCards(2)
+  //     setIsAllMoviesShown(foundMovies.length > movieCard.length)
+  //   }
+  // }
+
+  // function handleShowMore() {
+  //   const foundMovies = JSON.parse(localStorage.getItem('foundMovies'))
+  //   setMovieCard(foundMovies.slice(0, movieCard.length + moreCards))
+  //   setIsAllMoviesShown(foundMovies.length > movieCard.length)
+  // }
+
   return (
     <div className="App">
       <CurrentUserContext.Provider value={currentUser}>
@@ -235,9 +226,9 @@ function App() {
               isSaved={isSaved}
               onSaveMovie={handleCardSave}
               onDeleteMovie={handleDeleteCard}
-              onShowMoreButton={handleShowMore}
+              // onShowMoreButton={handleShowMore}
+              // onResize={handleResize}
               onInfoTooltip={handleInfoTooltipOpen}
-              onResize={handleResize}
               isLoading={isLoading}
               isAllMoviesShown={isAllMoviesShown}
             />
@@ -252,8 +243,9 @@ function App() {
               onMenuClick={handleMenuClick}
               onDeleteMovie={handleDeleteCard}
               onInfoTooltip={handleInfoTooltipOpen}
-              onResize={handleResize}
+              // onResize={handleResize}
               isLoading={isLoading}
+              setIsLoading={setIsLoading}
             />
           }
           />
