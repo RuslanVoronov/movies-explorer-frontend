@@ -11,6 +11,8 @@ export function useForm(inputValues) {
         setValues({ ...values, [name]: value });
         setErrors({ ...errors, [name]: event.target.validationMessage });
         setIsValid(event.target.closest('form').checkValidity() && EMAIL_REGEXP.test(values.email));
+
+        // console.log(values.email)
         if (name === "email") {
             if (!EMAIL_REGEXP.test(value)) {
                 setErrors({
