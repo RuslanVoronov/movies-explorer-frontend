@@ -26,7 +26,6 @@ function MoviesCard({ movieCardInfo, OnSaveMovie, onDeleteMovie, isSaved }) {
         onDeleteMovie(movieCardInfo)
     }
 
-
     return (
         <li className="movie-card">
             <div className='movie-card__container'>

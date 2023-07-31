@@ -5,7 +5,6 @@ export function useForm(inputValues) {
     const [values, setValues] = useState(inputValues);
     const [isValid, setIsValid] = useState(false);
     const [errors, setErrors] = useState({});
-    const [checkbox, setCheckbox] = useState(inputValues.checkbox)
 
     const handleChange = (event) => {
         const { value, name } = event.target;
@@ -22,8 +21,5 @@ export function useForm(inputValues) {
             }
         }
     };
-    const handleChangeCheckBox = (event) => {
-        setCheckbox(event.target.checked)
-    }
-    return { values, handleChange, setIsValid, isValid, errors, checkbox, handleChangeCheckBox };
+    return { values, handleChange, setIsValid, isValid, errors };
 }

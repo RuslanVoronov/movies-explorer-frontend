@@ -5,7 +5,7 @@ import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList"
 import mainApi from '../../utils/MainApi';
 import '../Movies/Movies.css'
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 
 function SavedMovies({ onMenuClick, onDeleteMovie, isSaved, onInfoTooltip,
@@ -21,6 +21,11 @@ function SavedMovies({ onMenuClick, onDeleteMovie, isSaved, onInfoTooltip,
                 console.log(`Ошибка: ${err}`)
             })
     }, [])
+    const [foundMovies, setFoundMovies] = useState(savedMovies)
+
+    useEffect(() => {
+        setFoundMovies(savedMovies)
+    }, [savedMovies])
 
     const movies = JSON.parse(localStorage.getItem('savedMovies'))
 
@@ -32,7 +37,7 @@ function SavedMovies({ onMenuClick, onDeleteMovie, isSaved, onInfoTooltip,
             return
         }
         localStorage.setItem('foundSavedMovies', JSON.stringify(searchedMovies))
-        setSavedMovies(searchedMovies)
+        setFoundMovies(searchedMovies)
         onResize()
     }
 
@@ -43,7 +48,7 @@ function SavedMovies({ onMenuClick, onDeleteMovie, isSaved, onInfoTooltip,
             onInfoTooltip("Ничего не найдено")
             return
         }
-        setSavedMovies(foundMovies);
+        setFoundMovies(foundMovies);
         onResize()
     }
 
@@ -59,7 +64,7 @@ function SavedMovies({ onMenuClick, onDeleteMovie, isSaved, onInfoTooltip,
                     onCheckBox={handleCheckbox}
                     defaultValues={defaultValues}
                 />
-                <MoviesCardList movieCard={savedMovies} onDeleteMovie={onDeleteMovie} isSaved={isSaved} onShowMoreButton={onShowMoreButton}
+                <MoviesCardList movieCard={foundMovies} onDeleteMovie={onDeleteMovie} isSaved={isSaved} onShowMoreButton={onShowMoreButton}
                     foundMovies={movies} isLoading={isLoading}
                 />
             </section>

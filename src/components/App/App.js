@@ -62,6 +62,14 @@ function App() {
         .catch((err) => {
           console.log(`Ошибка: ${err}`);
         })
+      mainApi.getMovies()
+        .then((res) => {
+          setSavedMovies(res)
+          localStorage.setItem('savedMovies', JSON.stringify(res))
+        })
+        .catch((err) => {
+          console.log(`Ошибка: ${err}`)
+        });
     }
   }, [loggedIn]);
 
@@ -178,7 +186,7 @@ function App() {
     if (windowWidth > 768) {
       setMovieCard(foundMovies.slice(0, 12))
       setMoreCards(3)
-    } else if (windowWidth <= 768) {
+    } else if (windowWidth > 500 && windowWidth <= 768) {
       setMovieCard(foundMovies.slice(0, 8))
       setMoreCards(2)
     } else if (windowWidth <= 500) {

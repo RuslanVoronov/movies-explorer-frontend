@@ -24,6 +24,8 @@ function Movies({ onMenuClick, onSaveMovie, isSaved, onDeleteMovie,
         setMovieCard(foundMovies)
         onResize()
     }
+
+
     function handleCheckbox(checkbox) {
         const movies = JSON.parse(localStorage.getItem('searchedMovies')) ?? [];
         const foundMovies = checkbox ? movies.filter((item) => item.duration <= 40) : movies
@@ -36,6 +38,8 @@ function Movies({ onMenuClick, onSaveMovie, isSaved, onDeleteMovie,
         setMovieCard(foundMovies);
         onResize()
     }
+
+
     const foundMovies = localStorage.getItem('foundMovies') ?? "{}";
     const movieName = localStorage.getItem('searchedMovieName') ?? '';
     const checkbox = localStorage.getItem('checkbox') ?? false;
