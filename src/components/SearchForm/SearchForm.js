@@ -3,18 +3,11 @@ import { useForm } from '../../hooks/useForm';
 import { useState, useEffect } from 'react';
 
 function SearchForm({ onSearchMovie, onInfoTooltip, onCheckBox, defaultValues }) {
-    useEffect(() => {
-        setCheckbox(defaultValues.checkbox)
-    }, [])
+
+    const savedCheckbox = defaultValues.checkbox
 
     const { values, handleChange } = useForm(defaultValues)
-    const [checkbox, setCheckbox] = useState(false)
-
-
-
-    // function handleCheckBox() {
-    //     onCheckBox(!checkbox)
-    // }
+    const [checkbox, setCheckbox] = useState(savedCheckbox)
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -31,7 +24,6 @@ function SearchForm({ onSearchMovie, onInfoTooltip, onCheckBox, defaultValues })
         setCheckbox(!checkbox)
         onCheckBox(!checkbox)
     }
-    console.log(checkbox)
     return (
         <section className="search">
             <div className='search__container'>
@@ -43,7 +35,7 @@ function SearchForm({ onSearchMovie, onInfoTooltip, onCheckBox, defaultValues })
                 </form>
                 <div className="search__toggle">
                     <label className="search__tumbler">
-                        <input type="checkbox" checked={checkbox} onChange={handleChangeCheckBox} className="search__invisible-checkbox" />
+                        <input type="checkbox"  checked={checkbox} onChange={handleChangeCheckBox} className="search__invisible-checkbox" />
                         <span className="search__visible-checkbox" />
                     </label>
                     <p className="search__text">Короткометражки</p>

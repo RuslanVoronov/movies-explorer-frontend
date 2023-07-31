@@ -42,7 +42,7 @@ function Movies({ onMenuClick, onSaveMovie, isSaved, onDeleteMovie,
 
     const foundMovies = localStorage.getItem('foundMovies') ?? "{}";
     const movieName = localStorage.getItem('searchedMovieName') ?? '';
-    const checkbox = localStorage.getItem('checkbox') ?? false;
+    const checkbox = JSON.parse(localStorage.getItem('checkbox')) ?? false;
     const defaultValues = { movieName, checkbox }
     return (
         <>
