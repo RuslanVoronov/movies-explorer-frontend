@@ -1,0 +1,40 @@
+.movies {
+    padding: 0 70px;
+}
+
+.movies__button {
+    margin-bottom: 80px;
+    max-width: 320px;
+    width: 100%;
+    height: 36px;
+    border: solid #E8E8E8;
+    border-radius: 3px;
+    background: #FFF;
+    color: #000;
+    text-align: center;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.movies__button_hidden {
+    visibility: hidden;
+}
+
+.movies__button:hover {
+    cursor: pointer;
+    opacity: .6;
+}
+
+@media (max-width:768px) {
+    .movies {
+        padding: 0 30px;
+    }
+}
+
+@media (max-width:400px) {
+    .movies {
+        padding: 0 10px;
+    }
+}

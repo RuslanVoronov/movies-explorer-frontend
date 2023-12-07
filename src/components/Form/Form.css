@@ -1,0 +1,146 @@
+.form {
+    padding: 70px 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Inter', Arial, sans-serif;
+    align-items: center;
+    text-align: start;
+    margin: 0;
+    height: 100vh;
+}
+
+.form__container {
+    width: 100%;
+    max-width: 400px;
+}
+
+.form__logo {
+    align-items: start;
+}
+
+.form__title {
+    margin: 40px 0;
+    text-align: start;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.form__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+    max-width: 400px;
+}
+
+.form__area {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+}
+
+.form__text {
+    margin: 0 0 5px;
+    color: #A0A0A0;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.form__input {
+    border: none;
+    background-color: transparent;
+    border-bottom: 2px solid #E8E8E8;
+    padding-bottom: 10px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+.form__input:focus {
+    outline: none;
+    border-bottom: 2px solid #2BE080;
+}
+
+.form__input_error {
+    color: #EE3465;
+    border-bottom: 2px solid #EE3465;
+}
+
+.form__input_error:focus {
+    border-bottom: 2px solid #EE3465;
+}
+
+.form__error-message {
+    margin-top: 6px;
+    height: 25px;
+    color: #EE3465;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.form__extra-text {
+    margin: 0;
+    color: #A0A0A0;
+    text-align: center;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.form__link {
+    text-decoration: none;
+    color: #2BE080;
+    text-align: center;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.form__submit {
+    border-radius: 3px;
+    border: none;
+    background: #2BE080;
+    margin-bottom: 15px;
+    height: 45px;
+    cursor: pointer;
+    color: #FFF;
+    text-align: center;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.form__submit_invalid {
+    color: #000000;
+    background: #FFFFFF;
+    opacity: 0.2;
+    border: 1px solid #000000;
+    border-radius: 2px;
+    cursor: default;
+}
+
+@media (max-width: 450px) {
+    .form {
+        padding: 56px 30px 30px;
+    }
+
+    .form__container {
+        text-align: center;
+    }
+
+    .form__title {
+        text-align: center;
+    }
+}

@@ -1,0 +1,33 @@
+.nav-auth__list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-auth__link {
+    text-decoration: none;
+    color: #000;
+    text-align: right;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 16px;
+    margin-left: 30px;
+}
+
+.nav-auth__link_type_signin {
+    border-radius: 3px;
+    background: #2BE080;
+    padding: 8px 20px;
+}
+
+@media (max-width:400px) {
+    .nav-auth__link {
+        font-size: 10px;
+    }
+
+    .nav-auth__link_type_signin {
+        padding: 5px 12px;
+    }
+}

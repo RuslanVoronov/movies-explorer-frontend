@@ -1,0 +1,27 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 70px;
+}
+
+.header__logo {
+    height: 38px;
+}
+
+.header__menu-iten {
+    color: black;
+}
+
+@media (max-width:768px) {
+    .header {
+        padding: 18px 30px;
+    }
+}
+
+@media (max-width:500px) {
+    .header {
+        padding: 20px;
+    }
+}
